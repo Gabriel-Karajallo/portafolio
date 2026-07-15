@@ -1,4 +1,4 @@
-import { MapPin, Mail, BadgeCheck, Dumbbell, Goal, Plane, Gamepad2, Film, type LucideIcon } from 'lucide-react';
+import { MapPin, Mail, BadgeCheck, Coffee, Dumbbell, Goal, Plane, Gamepad2, Film, type LucideIcon } from 'lucide-react';
 import { Reveal } from '../Reveal';
 import { ImagePlaceholder } from '../ImagePlaceholder';
 import { bio, hobbies, aboutPhotos, aboutInfo, contact } from '../../data/content';
@@ -17,7 +17,9 @@ export function About() {
       <div className="about-intro">
         <div className="about-intro__text">
           <h2 className="about-title">Sobre mí</h2>
-          <p className="about-lead">{bio}</p>
+          <p className="about-lead">
+            {bio} <Coffee size={16} className="about-lead__icon" />
+          </p>
           <div className="about-meta">
             <div className="about-meta__item">
               <MapPin size={17} className="about-meta__icon" />

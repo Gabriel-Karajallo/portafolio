@@ -112,7 +112,7 @@ export const education = {
 };
 
 export const bio =
-  'Vivo en Sevilla, España. Fuera del código me encontrarás entrenando, viajando o disfrutando de una buena película y un buen café.';
+  'Vivo en Sevilla, España. Fuera del código me encontrarás realizando mis actividades favoritas como viajar o disfrutar de un buen cafe';
 
 export const aboutInfo = {
   location: 'Sevilla, España',

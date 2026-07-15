@@ -1,4 +1,4 @@
-import { ArrowRight, Send, Calendar, Code2, FolderGit2, Atom } from 'lucide-react';
+import { ArrowRight, Send, Calendar, Code2, FolderGit2, Atom, Download } from 'lucide-react';
 import { Reveal } from '../Reveal';
 import { ImagePlaceholder } from '../ImagePlaceholder';
 import { profilePhoto } from '../../data/content';
@@ -74,7 +74,10 @@ export function Hero() {
             <path d="M23 24C16 19 9 11 5 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             <path d="M10 4.5L5 3L6 8.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          <span>Apasionado por el código limpio y las buenas ideas.</span>
+          <a href="/cv-gabriel-karajallo.pdf" download className="hero__note-link">
+            <Download size={14} strokeWidth={2.25} />
+            Descargar CV
+          </a>
         </div>
       </Reveal>
     </div>
