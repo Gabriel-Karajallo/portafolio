@@ -8,7 +8,7 @@ export function useScrollToHash() {
     if (!location.hash) return;
     const el = document.querySelector(location.hash);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      el.scrollIntoView({ behavior: 'instant' });
     }
   }, [location]);
 }

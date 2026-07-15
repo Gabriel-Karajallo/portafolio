@@ -30,6 +30,7 @@ export interface ProjectDetailContent {
   galleryMaxWidth?: number;
   ctaLabel: string;
   ctaHref: string;
+  demoNote?: string;
 }
 
 export const experience: ExperienceItem[] = [
@@ -75,7 +76,8 @@ export const projects: ProjectSummary[] = [
   {
     id: 'gestiona',
     name: 'Gestiona',
-    summary: 'ERP para empresas y autónomos: gestión administrativa centralizada en una sola plataforma.',
+    summary:
+      'ERP multiusuario para empresas y autónomos: ingresos, gastos, facturación, inventario y equipo, todo en un solo lugar.',
     imgLabel: 'Captura de Gestiona',
     imgSrc: '/images/gestiona-cover.png',
     accent: '#33418c',
@@ -83,7 +85,8 @@ export const projects: ProjectSummary[] = [
   {
     id: 'gymtrack',
     name: 'GymTrack',
-    summary: 'App móvil para controlar entrenamientos y alimentación.',
+    summary:
+      'App móvil para entrenar y comer mejor: rutinas personalizadas por músculo y control nutricional con escáner de código de barras.',
     imgLabel: 'Captura de GymTrack',
     imgSrc: '/images/gymtrack-cover.jpg',
     accent: '#e8622c',
@@ -145,13 +148,15 @@ export const projectDetails: Record<string, ProjectDetailContent> = {
     id: 'gestiona',
     category: 'ERP · Web',
     name: 'Gestiona',
-    subtitle: 'ERP para empresas y autónomos que centraliza la gestión administrativa en una sola plataforma.',
+    subtitle:
+      'ERP multiusuario para empresas y autónomos que centraliza la gestión de ingresos, gastos, clientes y equipo en una sola plataforma.',
     description: [
       'Empresas y autónomos suelen depender de hojas de cálculo y herramientas sueltas para llevar su administración, lo que dificulta tener una visión unificada del negocio.',
-      'Gestiona reúne clientes, facturación e inventario en un mismo panel, con dos modalidades adaptadas: una para empresas y otra pensada para autónomos.',
+      'Gestiona se adapta a cada perfil de usuario: las empresas controlan caja diaria, inventario, clientes, servicios, empleados, horarios y vacaciones, además de generar los informes necesarios para la declaración a Hacienda. Los autónomos gestionan sus ingresos y gastos, presupuestos, clientes y facturación, con sus propios informes.',
+      'Los empleados, por su parte, pueden fichar su jornada laboral, consultar su horario y solicitar vacaciones desde la plataforma, mientras que los clientes reservan citas con la empresa de forma directa.',
     ],
     role: 'Desarrollo full stack del producto: diseño de la base de datos, API backend y la interfaz web.',
-    stack: ['C#', '.NET', 'React', 'TypeScript', 'SQL Server'],
+    stack: ['C#', '.NET', 'React', 'TypeScript', 'PostgreSQL'],
     gallery: [
       { label: 'Captura — Panel principal' },
       { label: 'Captura — Facturación' },
@@ -159,26 +164,29 @@ export const projectDetails: Record<string, ProjectDetailContent> = {
     ],
     galleryAspect: '16/10',
     ctaLabel: 'Ver demo',
-    ctaHref: '#',
+    ctaHref: 'https://appgestiona.netlify.app/',
+    demoNote: 'Si necesitas ver una demo, ponte en contacto conmigo: la aplicación requiere iniciar sesión.',
   },
   gymtrack: {
     id: 'gymtrack',
     category: 'App móvil',
     name: 'GymTrack',
-    subtitle: 'App móvil para controlar entrenamientos y alimentación, con foco en un registro rápido y claro.',
+    subtitle:
+      'App móvil que centraliza tus entrenamientos y tu alimentación, con seguimiento personalizado hasta alcanzar tu objetivo.',
     description: [
       'Llevar el registro de entrenamientos y comidas suele quedar repartido entre varias apps o notas sueltas, dificultando el seguimiento del progreso.',
-      'GymTrack centraliza rutinas de entrenamiento y alimentación en una sola app móvil, con foco en un registro rápido y claro del progreso.',
+      'GymTrack permite personalizar cada entrenamiento por músculo, editando peso, duración, descanso y cualquier otro detalle del ejercicio.',
+      'En alimentación, puedes registrar tus comidas manualmente o escaneando el código de barras del producto. La app calcula las calorías, proteínas y grasas que necesitas según tu objetivo (definición, ganancia de masa, etc.) y te muestra en todo momento cuánto te falta para alcanzarlo.',
     ],
     role: 'Desarrollo full stack de la app: modelo de datos, API y cliente móvil.',
-    stack: ['C#', '.NET', 'React', 'TypeScript', 'SQL Server'],
+    stack: ['C#', '.NET', 'React Native', 'TypeScript', 'SQL Server'],
     gallery: [
       { label: 'Pantalla — Rutinas' },
       { label: 'Pantalla — Alimentación' },
       { label: 'Pantalla — Progreso' },
     ],
     galleryAspect: '9/16',
-    galleryMaxWidth: 260,
+    galleryMaxWidth: 320,
     ctaLabel: 'Ver demo',
     ctaHref: '#',
   },

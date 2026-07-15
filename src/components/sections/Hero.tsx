@@ -1,6 +1,8 @@
 import { ArrowRight, Send, Calendar, Code2, FolderGit2, Atom, Download } from 'lucide-react';
 import { Reveal } from '../Reveal';
 import { ImagePlaceholder } from '../ImagePlaceholder';
+import { TextHighlighter } from '../TextHighlighter';
+import { ParticleBackground } from '../ParticleBackground';
 import { profilePhoto } from '../../data/content';
 
 const stats = [
@@ -12,6 +14,7 @@ const stats = [
 export function Hero() {
   return (
     <div id="top" className="hero">
+      <ParticleBackground />
       <Reveal className="hero__content">
         <div className="badge badge--available">
           <span className="badge__dot" />
@@ -20,7 +23,9 @@ export function Hero() {
         <h1 className="hero__title">
           Gabriel <span className="hero__title-accent">Karajallo</span>
         </h1>
-        <p className="hero__subtitle">Desarrollador Full Stack.</p>
+        <p className="hero__subtitle">
+          Desarrollador <TextHighlighter color="#e7e9f4">Full-Stack</TextHighlighter>.
+        </p>
         <p className="hero__description">
           Construyo aplicaciones web modernas y escalables enfocadas en la experiencia de usuario y el rendimiento.
         </p>
