@@ -2,7 +2,6 @@ import { ArrowRight, Send, Calendar, Code2, FolderGit2, Atom, Download } from 'l
 import { Reveal } from '../Reveal';
 import { ImagePlaceholder } from '../ImagePlaceholder';
 import { TextHighlighter } from '../TextHighlighter';
-import { ParticleBackground } from '../ParticleBackground';
 import { profilePhoto } from '../../data/content';
 
 const stats = [
@@ -14,7 +13,6 @@ const stats = [
 export function Hero() {
   return (
     <div id="top" className="hero">
-      <ParticleBackground />
       <Reveal className="hero__content">
         <div className="badge badge--available">
           <span className="badge__dot" />
