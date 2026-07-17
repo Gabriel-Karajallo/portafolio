@@ -3,7 +3,7 @@ export function Nav() {
     <div className="nav">
       <div className="nav__inner">
         <a href="#top" className="nav__logo">
-          GK
+          <img src="/images/logo.png" alt="Gabriel Karajallo" />
         </a>
         <div className="nav__links">
           <a href="#experiencia">Experiencia</a>

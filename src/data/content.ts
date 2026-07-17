@@ -110,9 +110,37 @@ export const skills = {
 };
 
 export const education = {
-  title: 'C.F.G.S Administración de Sistemas Informáticos y Redes',
-  institution: 'I.E.S Antonio Machado',
+  title: 'Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)',
+  institution: 'I.E.S. Antonio Machado',
 };
+
+export interface EducationSkill {
+  title: string;
+  description: string;
+}
+
+export const educationSkills: EducationSkill[] = [
+  {
+    title: 'Desarrollo y Programación Web',
+    description:
+      'Conocimientos de lenguajes de programación y desarrollo de aplicaciones web dinámicas y estables.',
+  },
+  {
+    title: 'Administración de Bases de Datos',
+    description:
+      'Conocimientos en la instalación y administración de sistemas gestores de bases de datos como MySQL y Oracle.',
+  },
+  {
+    title: 'Administración de Sistemas Operativos',
+    description:
+      'Experiencia en la instalación, configuración y administración de sistemas operativos, incluyendo Windows Server y entornos Linux, así como en el uso de la línea de comandos en ambos sistemas.',
+  },
+  {
+    title: 'Virtualización',
+    description:
+      'Manejo de tecnologías de virtualización como VirtualBox, con capacidad para crear y administrar máquinas virtuales.',
+  },
+];
 
 export const bio =
   'Vivo en Sevilla, España. Fuera del código me encontrarás realizando mis actividades favoritas como viajar o disfrutar de un buen cafe';
