@@ -74,6 +74,23 @@ export function ProjectDetail() {
               {paragraph}
             </p>
           ))}
+          {project.playStoreUrl !== undefined &&
+            (project.playStoreUrl ? (
+              <a
+                href={project.playStoreUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="detail-store-badge"
+              >
+                <img src="/images/google-play-badge.png" alt="Disponible en Google Play" />
+              </a>
+            ) : (
+              <img
+                className="detail-store-badge"
+                src="/images/google-play-badge.png"
+                alt="Disponible en Google Play"
+              />
+            ))}
           {project.demoNote && <DemoNote note={project.demoNote} />}
         </div>
         <div className="detail-overview__gallery">

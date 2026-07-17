@@ -25,12 +25,13 @@ export interface ProjectDetailContent {
   description: string[];
   role: string;
   stack: string[];
-  gallery: { label: string }[];
+  gallery: { label: string; src?: string }[];
   galleryAspect: string;
   galleryMaxWidth?: number;
   ctaLabel: string;
   ctaHref: string;
   demoNote?: string;
+  playStoreUrl?: string;
 }
 
 export const experience: ExperienceItem[] = [
@@ -214,8 +215,9 @@ export const projectDetails: Record<string, ProjectDetailContent> = {
       { label: 'Pantalla — Progreso' },
     ],
     galleryAspect: '9/16',
-    galleryMaxWidth: 320,
+    galleryMaxWidth: 420,
     ctaLabel: 'Ver demo',
     ctaHref: '#',
+    playStoreUrl: '',
   },
 };

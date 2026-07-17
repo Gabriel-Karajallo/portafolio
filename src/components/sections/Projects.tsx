@@ -43,7 +43,15 @@ export function Projects() {
                 </div>
                 <h3 className="project-entry__name">{project.name}</h3>
                 <p className="project-entry__summary">{project.summary}</p>
-                <div className="project-entry__stack">{detail.stack.join(' · ')}</div>
+                {detail.playStoreUrl !== undefined ? (
+                  <img
+                    className="project-entry__store-badge"
+                    src="/images/google-play-badge.png"
+                    alt="Disponible en Google Play"
+                  />
+                ) : (
+                  <div className="project-entry__stack">{detail.stack.join(' · ')}</div>
+                )}
                 <span className="project-entry__link" style={{ color: project.accent }}>
                   Ver proyecto
                   <ArrowUpRight size={16} />
