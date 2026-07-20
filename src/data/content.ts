@@ -144,7 +144,7 @@ export const educationSkills: EducationSkill[] = [
 ];
 
 export const bio =
-  'Vivo en Sevilla, España. Fuera del código me encontrarás realizando mis actividades favoritas como viajar o disfrutar de un buen cafe';
+  'Vivo en Sevilla, España. Fuera del código me encontrarás realizando mis actividades favoritas como viajar o disfrutar de un buen café';
 
 export const aboutInfo = {
   location: 'Sevilla, España',

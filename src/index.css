@@ -117,11 +117,106 @@ textarea {
   background: var(--accent-hover);
 }
 
-@media (max-width: 860px) {
+.nav__toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--text-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.nav__toggle:hover {
+  background: var(--bg-alt);
+}
+
+.nav__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(15, 16, 20, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.nav__overlay--open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.nav__drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 70;
+  width: min(78vw, 300px);
+  background: #ffffff;
+  box-shadow: -12px 0 32px rgba(15, 16, 20, 0.16);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 96px 28px 32px;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav__drawer--open {
+  transform: translateX(0);
+}
+
+.nav__drawer-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.nav__drawer a {
+  text-decoration: none;
+  color: var(--text-primary);
+  font-size: 17px;
+  font-weight: 600;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.nav__drawer .nav__cta {
+  margin-top: 20px;
+  text-align: center;
+  justify-content: center;
+  border-bottom: none;
+}
+
+@media (min-width: 781px) {
+  .nav__overlay,
+  .nav__drawer {
+    display: none;
+  }
+}
+
+@media (max-width: 780px) {
   .nav__links {
-    gap: 16px;
-    flex-wrap: wrap;
-    justify-content: flex-end;
+    display: none;
+  }
+
+  .nav__toggle {
+    display: flex;
   }
 }
 
@@ -506,7 +601,13 @@ textarea {
   .hero {
     flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-start;
     padding: 88px 24px 72px;
+    gap: 40px;
+  }
+
+  .hero__content {
+    flex-basis: auto;
   }
 
   .hero__title {
@@ -518,17 +619,14 @@ textarea {
   }
 
   .hero__stats {
-    margin-top: 32px;
-    padding-top: 24px;
-    flex-wrap: wrap;
-    row-gap: 16px;
+    display: none;
   }
 
   .hero__photo-wrap {
-    width: 200px;
-    height: 200px;
+    width: 280px;
+    height: 280px;
     align-self: center;
-    margin-top: 16px;
+    margin-top: 0;
   }
 
   .hero__chip {
