@@ -350,6 +350,15 @@ textarea {
   background: #22c55e;
 }
 
+.badge--warning {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge--warning .badge__dot {
+  background: #f59e0b;
+}
+
 .badge__dot {
   width: 7px;
   height: 7px;

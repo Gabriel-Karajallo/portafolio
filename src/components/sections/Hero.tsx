@@ -14,9 +14,9 @@ export function Hero() {
   return (
     <div id="top" className="hero">
       <Reveal className="hero__content">
-        <div className="badge badge--available">
+        <div className="badge badge--warning">
           <span className="badge__dot" />
-          Disponible para nuevos proyectos
+          Este sitio web está en desarrollo
         </div>
         <h1 className="hero__title">
           Gabriel <span className="hero__title-accent">Karajallo</span>
