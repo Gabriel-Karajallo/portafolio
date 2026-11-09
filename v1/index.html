@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gabriel Karajallo · Programador full-stack</title>
+<meta name="description" content="Gabriel Karajallo, programador full-stack en Sevilla. Aplicaciones web con .NET/C# y React, de la base de datos a la interfaz.">
+<meta name="theme-color" content="#eceeec">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<a class="skip" href="#perfil">Saltar al contenido</a>
+
+<header class="bar">
+  <a class="bar__mark" href="#top" aria-label="Inicio">G. Karajallo</a>
+  <nav class="bar__nav" aria-label="Secciones">
+    <a href="#perfil">Perfil</a>
+    <a href="#experiencia">Experiencia</a>
+    <a href="#herramientas">Herramientas</a>
+  </nav>
+  <a class="button button--small" href="#contacto">Contacto</a>
+</header>
+
+<main id="top">
+
+  <!-- HERO: el nombre fijo mientras pasan las capas del stack -->
+  <section class="stack" id="stack" aria-label="Presentación" data-step="0">
+    <div class="stack__stage">
+      <h1 class="stack__title lines">
+        <span class="line"><span data-line style="--i:0">Gabriel</span></span>
+        <span class="line"><span data-line style="--i:1">Karajallo</span></span>
+      </h1>
+      <p class="stack__sub">Programador full-stack en Sevilla</p>
+
+      <div class="stack__frame" data-open>
+        <figure class="layer is-active" data-layer="0">
+          <img src="assets/gabriel.jpg" width="1000" height="1000" alt="Retrato de Gabriel Karajallo con camisa azul marino sobre fondo gris" fetchpriority="high">
+        </figure>
+
+        <figure class="layer" data-layer="1" aria-hidden="true">
+          <div class="ui ui--app" data-ui>
+            <div class="ui__top">
+              <span class="ui__brand">Pedidos</span>
+              <span class="ui__search">Buscar cliente o nº de pedido</span>
+            </div>
+            <div class="ui__filters">
+              <span class="chip is-on">Todos</span><span class="chip">Pendientes</span><span class="chip">Enviados</span>
+            </div>
+            <table class="ui__table">
+              <thead><tr><th>Pedido</th><th>Cliente</th><th class="num">Total</th><th>Estado</th></tr></thead>
+              <tbody>
+                <tr><td>10482</td><td>Aceitunas Ruiz</td><td class="num">1.240,00</td><td><span class="tag tag--ok">Enviado</span></td></tr>
+                <tr><td>10481</td><td>Cerámica Triana</td><td class="num">386,50</td><td><span class="tag tag--wait">Pendiente</span></td></tr>
+                <tr><td>10480</td><td>Logística Sur</td><td class="num">2.915,20</td><td><span class="tag tag--ok">Enviado</span></td></tr>
+                <tr><td>10479</td><td>Imprenta Alfalfa</td><td class="num">94,80</td><td><span class="tag tag--err">Incidencia</span></td></tr>
+                <tr><td>10478</td><td>Bodegas Aljarafe</td><td class="num">731,00</td><td><span class="tag tag--ok">Enviado</span></td></tr>
+                <tr><td>10477</td><td>Taller Macarena</td><td class="num">158,25</td><td><span class="tag tag--wait">Pendiente</span></td></tr>
+              </tbody>
+            </table>
+            <div class="ui__foot"><span>6 de 1.204 pedidos</span><span class="ui__btn">Nuevo pedido</span></div>
+          </div>
+        </figure>
+
+        <figure class="layer" data-layer="2" aria-hidden="true">
+          <div class="ui ui--code" data-ui>
+            <div class="ui__tab">PedidosController.cs</div>
+<pre><code><span class="k">[ApiController]</span>
+<span class="k">[Route</span>(<span class="s">"api/pedidos"</span>)<span class="k">]</span>
+<span class="k">public class</span> <span class="t">PedidosController</span> : <span class="t">ControllerBase</span>
+{
+    <span class="k">private readonly</span> <span class="t">IPedidoService</span> _pedidos;
+
+    <span class="k">public</span> PedidosController(<span class="t">IPedidoService</span> pedidos)
+        => _pedidos = pedidos;
+
+    <span class="k">[HttpGet</span>(<span class="s">"{id:int}"</span>)<span class="k">]</span>
+    <span class="k">public async</span> <span class="t">Task</span>&lt;<span class="t">ActionResult</span>&lt;<span class="t">PedidoDto</span>&gt;&gt;
+        Obtener(<span class="k">int</span> id)
+    {
+        <span class="k">var</span> pedido = <span class="k">await</span> _pedidos.ObtenerAsync(id);
+        <span class="k">return</span> pedido <span class="k">is null</span>
+            ? NotFound()
+            : Ok(pedido);
+    }
+}</code></pre>
+          </div>
+        </figure>
+
+        <figure class="layer" data-layer="3" aria-hidden="true">
+          <div class="ui ui--code" data-ui>
+            <div class="ui__tab">ultimos-pedidos.sql</div>
+<pre><code><span class="k">SELECT</span> p.Id, c.Nombre, p.Total, p.Estado
+<span class="k">FROM</span>   Pedidos p
+<span class="k">JOIN</span>   Clientes c <span class="k">ON</span> c.Id = p.ClienteId
+<span class="k">WHERE</span>  p.Fecha &gt;= <span class="t">DATEADD</span>(day, <span class="s">-30</span>, <span class="t">GETDATE</span>())
+<span class="k">ORDER BY</span> p.Fecha <span class="k">DESC</span>;</code></pre>
+            <table class="ui__table ui__table--grid">
+              <thead><tr><th>Id</th><th>Nombre</th><th class="num">Total</th><th>Estado</th></tr></thead>
+              <tbody>
+                <tr><td>10482</td><td>Aceitunas Ruiz</td><td class="num">1240.00</td><td>ENV</td></tr>
+                <tr><td>10481</td><td>Cerámica Triana</td><td class="num">386.50</td><td>PEN</td></tr>
+                <tr><td>10480</td><td>Logística Sur</td><td class="num">2915.20</td><td>ENV</td></tr>
+                <tr><td>10479</td><td>Imprenta Alfalfa</td><td class="num">94.80</td><td>INC</td></tr>
+              </tbody>
+            </table>
+            <div class="ui__foot"><span>4 filas · 0,03 s</span></div>
+          </div>
+        </figure>
+
+        <figure class="layer" data-layer="4" aria-hidden="true">
+          <div class="ui ui--code ui--shell" data-ui>
+            <div class="ui__tab">Administrador: PowerShell</div>
+<pre><code><span class="p">PS C:\&gt;</span> Get-ADUser -Filter <span class="s">'Department -eq "Desarrollo"'</span> |
+       Select-Object Name, Enabled
+
+Name               Enabled
+----               -------
+<span class="t">Lucía Martín</span>          True
+<span class="t">Álvaro Pérez</span>          True
+<span class="t">Marta Reyes</span>          False
+
+<span class="p">PS C:\&gt;</span> Test-NetConnection srv-app01 -Port 443
+
+ComputerName     : srv-app01
+RemotePort       : 443
+TcpTestSucceeded : <span class="t">True</span></code></pre>
+          </div>
+        </figure>
+      </div>
+
+      <p class="stack__lead" data-load style="--d:420ms">
+        Programador full-stack en Sevilla. Construyo aplicaciones web con .NET&nbsp;/&nbsp;C# y React, de la base de datos a la interfaz.
+      </p>
+
+      <div class="stack__side" data-load style="--d:520ms">
+        <p class="stack__caption" aria-live="polite">
+          <strong class="stack__name">En Wortach desde 2025</strong>
+          <span class="stack__text">Backend en .NET y C#, frontend en React con TypeScript.</span>
+        </p>
+        <ol class="stack__steps" aria-label="Capas">
+          <li class="is-active">Yo</li><li>Interfaz</li><li>API</li><li>Datos</li><li>Sistemas</li>
+        </ol>
+        <a class="button" href="#contacto">Escríbeme</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERFIL + consola -->
+  <section class="profile" id="perfil">
+    <div class="profile__text">
+      <h2 class="head" data-reveal>De sistemas a software</h2>
+      <p class="profile__lede" data-reveal style="--r:1">Empecé administrando servidores, redes y Active Directory. Hoy escribo las aplicaciones que corren encima.</p>
+      <p data-reveal style="--r:2">Soy técnico superior en Administración de Sistemas Informáticos en Red, pero lo que me engancha es construir software. En Wortach desarrollo productos internos y de cliente: el backend en .NET y C#, el frontend en React con TypeScript, y el diseño y mantenimiento de las bases de datos que los sostienen.</p>
+      <p data-reveal style="--r:3">Conocer la parte de sistemas me ayuda a escribir código que se despliega sin sorpresas y a encontrar rápido dónde está el problema cuando algo falla. Lo que más disfruto es hacer interfaces que la gente entiende a la primera.</p>
+    </div>
+
+    <div class="console" data-ui data-reveal style="--r:2">
+      <div class="console__head">
+        <h3 class="console__title">Pregúntale a mi API</h3>
+        <div class="console__verbs" role="tablist" aria-label="Endpoints">
+          <button role="tab" aria-selected="true" aria-controls="console-out" data-ep="perfil">/perfil</button>
+          <button role="tab" aria-selected="false" aria-controls="console-out" data-ep="experiencia">/experiencia</button>
+          <button role="tab" aria-selected="false" aria-controls="console-out" data-ep="stack">/stack</button>
+          <button role="tab" aria-selected="false" aria-controls="console-out" data-ep="contacto">/contacto</button>
+        </div>
+      </div>
+      <div class="console__req"><span class="console__get">GET</span> <span data-path>api.karajallo.dev/perfil</span> <span class="console__ok">200 OK</span></div>
+<pre class="console__out" id="console-out" role="tabpanel" tabindex="0"><code data-out>{
+  "nombre": "Gabriel Karajallo",
+  "rol": "Programador full-stack",
+  "ubicacion": "Sevilla",
+  "empresa": "Wortach",
+  "desde": "2025-07",
+  "idiomas": { "español": "nativo", "inglés": "B1" }
+}</code></pre>
+    </div>
+  </section>
+
+  <!-- EXPERIENCIA: foto fija, lista activa -->
+  <section class="career" id="experiencia">
+    <div class="career__pic">
+      <figure class="career__fig is-on" data-pic="0">
+        <img src="assets/metropol-parasol-20180719-1.jpg" width="1920" height="1280" alt="Estructura reticular de madera del Metropol Parasol de Sevilla contra el cielo azul" loading="lazy">
+      </figure>
+      <figure class="career__fig" data-pic="1">
+        <img src="assets/plaza-de-espana-sevilla-01.jpg" width="1920" height="1280" alt="Plaza de España de Sevilla con su canal y sus torres" loading="lazy">
+      </figure>
+      <figure class="career__fig" data-pic="2">
+        <img src="assets/sevilla-monumental-azulejos-plaza-de-espana-sevilla.jpg" width="1920" height="1695" alt="Banco de azulejos de la provincia de Sevilla en la Plaza de España" loading="lazy">
+      </figure>
+      <p class="career__credit" data-credit>Metropol Parasol, Sevilla</p>
+    </div>
+
+    <div class="career__list">
+      <h2 class="head" data-reveal>Experiencia</h2>
+      <ul class="roles">
+        <li class="role is-on" data-role="0" data-credit="Metropol Parasol, Sevilla">
+          <button class="role__row" aria-expanded="true" aria-controls="role-0">
+            <span class="role__name">Wortach</span>
+            <span class="role__when">Jul 2025 – hoy</span>
+          </button>
+          <div class="role__body" id="role-0">
+            <div>
+              <p class="role__job">Programador full-stack</p>
+              <p>Desarrollo y mantengo aplicaciones web empresariales, internas y de cliente, en todo el ciclo: nuevas funcionalidades, optimización del rendimiento y resolución de incidencias.</p>
+              <p>Backend en .NET y C#, frontend en React con TypeScript, y colaboración en el diseño y mantenimiento de las bases de datos. Formo parte del equipo que construye soluciones escalables y cuida la calidad del software.</p>
+            </div>
+          </div>
+        </li>
+        <li class="role" data-role="1" data-credit="Plaza de España, Sevilla">
+          <button class="role__row" aria-expanded="false" aria-controls="role-1">
+            <span class="role__name">Insinno España</span>
+            <span class="role__when">Jun – Nov 2024</span>
+          </button>
+          <div class="role__body" id="role-1">
+            <div>
+              <p class="role__job">Desarrollador front-end</p>
+              <p>Interfaces web responsivas con Angular y TypeScript, trabajando codo con codo con el equipo de diseño para convertir prototipos en aplicaciones que funcionan.</p>
+              <p>Integración de APIs REST con los servicios backend, pruebas para asegurar la calidad del código y trabajo ágil: sprints, revisiones de código y Git.</p>
+            </div>
+          </div>
+        </li>
+        <li class="role" data-role="2" data-credit="Azulejos de la Plaza de España, Sevilla">
+          <button class="role__row" aria-expanded="false" aria-controls="role-2">
+            <span class="role__name">I.E.S. Antonio Machado</span>
+            <span class="role__when">2022 – 2024</span>
+          </button>
+          <div class="role__body" id="role-2">
+            <div>
+              <p class="role__job">CFGS Administración de Sistemas Informáticos en Red</p>
+              <p>Windows Server y Linux, Active Directory, redes, virtualización con VirtualBox y administración de MySQL y Oracle. La base que hoy uso para entender lo que pasa debajo de cada aplicación.</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- QUÉ CONSTRUYO: tarjetas sobre una foto fija -->
+  <section class="build" id="construyo">
+    <div class="build__stage">
+    <div class="build__ground">
+      <img src="assets/metropol-parasol-plaza-de-la-encarnacion-1.jpg" width="1920" height="1280" alt="" loading="lazy">
+    </div>
+    <div class="build__inner">
+      <div class="build__intro">
+        <h2 class="head" data-reveal>Qué construyo</h2>
+        <p data-reveal style="--r:1">Cuatro tipos de trabajo que hago cada semana, de la base de datos a la pantalla.</p>
+      </div>
+      <ul class="build__track" tabindex="0" aria-label="Tipos de trabajo">
+        <li class="card card--a">
+          <div class="card__ui" data-ui>
+            <div class="mini mini--table">
+              <div class="mini__bar"><b>Usuarios y permisos</b><span>Exportar</span></div>
+              <div class="mini__row"><span>Ana Torres</span><span>Administración</span><i class="on"></i></div>
+              <div class="mini__row"><span>Pablo Gil</span><span>Almacén</span><i class="on"></i></div>
+              <div class="mini__row"><span>Rocío Sanz</span><span>Ventas</span><i></i></div>
+              <div class="mini__row"><span>Javier León</span><span>Ventas</span><i class="on"></i></div>
+            </div>
+          </div>
+          <div class="card__foot">
+            <h3>Aplicaciones de empresa</h3>
+            <p>Herramientas internas que un equipo usa a diario: gestión, informes y permisos.</p>
+          </div>
+        </li>
+        <li class="card card--b">
+          <div class="card__ui" data-ui>
+            <div class="mini mini--form">
+              <b>Nueva incidencia</b>
+              <label>Asunto<span class="mini__field">No carga el informe mensual</span></label>
+              <label>Prioridad<span class="mini__seg"><em>Baja</em><em class="on">Media</em><em>Alta</em></span></label>
+              <span class="mini__cta">Enviar</span>
+            </div>
+          </div>
+          <div class="card__foot">
+            <h3>Interfaces claras</h3>
+            <p>Del prototipo de diseño a una pantalla responsive, accesible y probada.</p>
+          </div>
+        </li>
+        <li class="card card--c">
+          <div class="card__ui" data-ui>
+            <div class="mini mini--http">
+              <p><b>POST</b> /api/incidencias</p>
+              <pre><code>{ "asunto": "No carga el informe",
+  "prioridad": "media" }</code></pre>
+              <p><b class="ok">201</b> Created · Location: /api/incidencias/318</p>
+            </div>
+          </div>
+          <div class="card__foot">
+            <h3>APIs en .NET</h3>
+            <p>Endpoints REST que conectan cada pantalla con sus datos, validados y documentados.</p>
+          </div>
+        </li>
+        <li class="card card--d">
+          <div class="card__ui" data-ui>
+            <div class="mini mini--schema">
+              <div class="mini__ent"><b>Clientes</b><span>Id · int</span><span>Nombre · nvarchar</span><span>Cif · char(9)</span></div>
+              <div class="mini__ent"><b>Pedidos</b><span>Id · int</span><span>ClienteId · int</span><span>Total · decimal</span></div>
+            </div>
+          </div>
+          <div class="card__foot">
+            <h3>Bases de datos</h3>
+            <p>Esquemas en SQL Server pensados antes de escribir la primera línea de código.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    </div>
+  </section>
+
+  <!-- HERRAMIENTAS: nombres que pasan sobre un cuadrado fijo -->
+  <section class="tools" id="herramientas">
+    <div class="tools__hold" aria-hidden="true">
+      <div class="tools__square" data-square></div>
+      <p class="tools__fact tools__fact--l" data-fact-l>Frontend</p>
+      <p class="tools__fact tools__fact--r" data-fact-r>En Wortach, a diario</p>
+    </div>
+    <h2 class="tools__head">Herramientas</h2>
+    <ul class="tools__list">
+      <li data-k="front" data-l="Frontend" data-r="En Wortach, a diario">React</li>
+      <li data-k="front" data-l="Frontend" data-r="Wortach e Insinno">TypeScript</li>
+      <li data-k="front" data-l="Frontend" data-r="Insinno, 2024">Angular</li>
+      <li data-k="front" data-l="Móvil" data-r="Formación propia">React Native</li>
+      <li data-k="back" data-l="Backend" data-r="En Wortach, a diario">C#</li>
+      <li data-k="back" data-l="Backend" data-r="En Wortach, a diario">.NET</li>
+      <li data-k="back" data-l="Backend" data-r="Formación">Java</li>
+      <li data-k="back" data-l="Backend" data-r="Formación">PHP</li>
+      <li data-k="data" data-l="Datos" data-r="SQL Management Studio">SQL Server</li>
+      <li data-k="data" data-l="Datos" data-r="ASIR, 2022–2024">MySQL</li>
+      <li data-k="data" data-l="Datos" data-r="ASIR, 2022–2024">Oracle</li>
+      <li data-k="tool" data-l="Herramientas" data-r="Git, Postman, Visual Studio">Git</li>
+      <li data-k="it" data-l="Sistemas" data-r="ASIR, 2022–2024">Windows Server</li>
+      <li data-k="it" data-l="Sistemas" data-r="ASIR, 2022–2024">Active Directory</li>
+    </ul>
+  </section>
+
+  <!-- CONTACTO: tarjeta sobre el puente de Triana -->
+  <section class="contact" id="contacto">
+    <figure class="contact__pic">
+      <img class="drift" src="assets/puente-de-triana-sevilla-espana-2015-12.jpg" width="1920" height="850" alt="El puente de Triana sobre el Guadalquivir en Sevilla" loading="lazy">
+    </figure>
+    <div class="contact__card" data-reveal>
+      <h2 class="contact__title">Hablemos</h2>
+      <p>Busco proyectos donde seguir aprendiendo y aportar. Si tienes uno, escríbeme.</p>
+      <dl class="contact__rows">
+        <div><dt>Email</dt><dd><a class="link" href="mailto:c.gabrielkarajallo@gmail.com">c.gabrielkarajallo@gmail.com</a></dd></div>
+        <div><dt>Teléfono</dt><dd><a class="link" href="tel:+34610970464">+34 610 97 04 64</a></dd></div>
+        <div><dt>LinkedIn</dt><dd><a class="link" href="https://www.linkedin.com/in/gabrielkarajallo/" target="_blank" rel="noopener">gabrielkarajallo</a></dd></div>
+        <div><dt>Ciudad</dt><dd>Sevilla, España</dd></div>
+        <div><dt>Idiomas</dt><dd>Español nativo · Inglés B1</dd></div>
+      </dl>
+      <a class="button button--wide" href="mailto:c.gabrielkarajallo@gmail.com?subject=Hola%20Gabriel&amp;body=Hola%20Gabriel%2C%20he%20visto%20tu%20portafolio%20y%20quer%C3%ADa%20comentarte%20un%20proyecto.">Escribirme un email</a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <figure class="foot__pic">
+    <img src="assets/gabriel.jpg" width="1000" height="1000" alt="Gabriel Karajallo" loading="lazy">
+  </figure>
+  <div class="foot__side">
+    <p class="foot__mark">Gabriel Karajallo</p>
+    <nav class="foot__menu" aria-label="Pie">
+      <a href="#top">Inicio</a>
+      <a href="#perfil">Perfil</a>
+      <a href="#experiencia">Experiencia</a>
+      <a href="#construyo">Qué construyo</a>
+      <a href="#herramientas">Herramientas</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="foot__blocks">
+      <p>c.gabrielkarajallo@gmail.com<br>+34 610 97 04 64</p>
+      <p><a class="link" href="https://www.linkedin.com/in/gabrielkarajallo/" target="_blank" rel="noopener">LinkedIn</a><br>Sevilla, España</p>
+    </div>
+    <p class="foot__legal">© 2026 Gabriel Karajallo. Fotografías de Sevilla vía Wikimedia Commons, licencia <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>: <a href="https://commons.wikimedia.org/wiki/File:Metropol_Parasol_20180719-1.jpg">“Metropol Parasol 20180719-1”</a> de Suicasmo; <a href="https://commons.wikimedia.org/wiki/File:Metropol_Parasol_Plaza_de_la_Encarnaci%C3%B3n_1.jpg">“Metropol Parasol Plaza de la Encarnación 1”</a> de kallerna; <a href="https://commons.wikimedia.org/wiki/File:Plaza_de_Espa%C3%B1a_(Sevilla)_-_01.jpg">“Plaza de España (Sevilla) - 01”</a> de Carlos Delgado; <a href="https://commons.wikimedia.org/wiki/File:Sevilla_Monumental_azulejos_(Plaza_de_Espa%C3%B1a,_Sevilla).jpg">“Sevilla Monumental azulejos”</a> de Gzzz; <a href="https://commons.wikimedia.org/wiki/File:Puente_de_Triana,_Sevilla,_Espa%C3%B1a,_2015-12-06,_DD_67.JPG">“Puente de Triana, Sevilla, 2015-12-06, DD 67”</a> de Diego Delso.</p>
+  </div>
+</footer>
+
+<script src="main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+// Textos de la interfaz en cada idioma.
+import { useLang, type Lang } from '../lib/i18n';
+
+const es = {
+  nav: { work: 'Trabajo', about: 'Sobre mí', contact: 'Contacto', main: 'Principal' },
+  tools: { invert: 'Invertir color', sound: 'Sonido', on: 'sí', off: 'no', language: 'Idioma' },
+  clock: (city: string, time: string) => `Hora en ${city}: ${time}`,
+  cursor: { write: 'Escríbeme', view: 'Ver proyecto', send: 'Enviar', visit: 'Visitar web' },
+  work: {
+    aria: 'Proyectos',
+    soonKind: 'Próximamente',
+    soonTitle: 'Más proyectos',
+    building: 'En construcción',
+    hint: 'Rueda o ↑ ↓ para navegar',
+    soonHint: 'Pronto más proyectos · mientras tanto, hablemos',
+    open: 'Ver proyecto',
+    contact: 'Contacto',
+  },
+  project: {
+    scroll: 'Desliza para leer ↓',
+    about: 'El proyecto',
+    features: 'Qué hace',
+    next: 'Siguiente proyecto',
+    moreSoon: 'Más proyectos en camino',
+    talk: '¿Hablamos?',
+    back: 'Trabajo',
+    year: 'Año',
+    type: 'Tipo',
+    role: 'Rol',
+    stack: 'Stack',
+    web: 'Web',
+  },
+  about: {
+    title: ['Un poco más', 'sobre mí'],
+    info: 'Info',
+    years: (n: number, city: string) =>
+      `${n > 1 ? `${n} años` : 'Más de un año'} escribiendo software de forma profesional, desde ${city}.`,
+    hobbies: 'Fuera de la pantalla',
+    languages: 'Idiomas',
+    talk: 'Hablemos',
+    form: 'Formulario',
+    experience: 'Experiencia',
+    stack: 'Stack',
+  },
+  contact: {
+    title: ['Cuéntame', 'qué tienes', 'en mente'],
+    sentTitle: ['Gracias,', 'te leo pronto.'],
+    sent: 'Enviado',
+    sentOk: 'Tu mensaje ha llegado. Te respondo en uno o dos días laborables.',
+    sentMail: 'Se ha abierto tu programa de correo con el mensaje escrito; solo falta darle a enviar.',
+    again: 'Escribir otro mensaje',
+    topic: 'Sobre',
+    topicAria: 'Sobre qué quieres hablar',
+    you: 'Tus datos',
+    name: 'Nombre',
+    namePh: '¿Cómo te llamas?',
+    email: 'Correo',
+    emailPh: 'tu@correo.com',
+    message: 'Mensaje',
+    messagePh: 'Qué necesitas, para cuándo y cualquier detalle que ayude.',
+    send: 'Enviar mensaje',
+    sending: 'Enviando…',
+    error: 'No se ha podido enviar. Prueba otra vez o escríbeme a',
+    direct: 'O directamente',
+  },
+};
+
+type UI = typeof es;
+
+const en: UI = {
+  nav: { work: 'Work', about: 'About', contact: 'Contact', main: 'Main' },
+  tools: { invert: 'Invert colours', sound: 'Sound', on: 'on', off: 'off', language: 'Language' },
+  clock: (city: string, time: string) => `Time in ${city}: ${time}`,
+  cursor: { write: 'Write to me', view: 'View project', send: 'Send', visit: 'Visit site' },
+  work: {
+    aria: 'Projects',
+    soonKind: 'Coming soon',
+    soonTitle: 'More projects',
+    building: 'Under construction',
+    hint: 'Scroll or ↑ ↓ to browse',
+    soonHint: 'More projects soon · meanwhile, let’s talk',
+    open: 'View project',
+    contact: 'Contact',
+  },
+  project: {
+    scroll: 'Scroll to read ↓',
+    about: 'The project',
+    features: 'What it does',
+    next: 'Next project',
+    moreSoon: 'More projects on the way',
+    talk: 'Let’s talk',
+    back: 'Work',
+    year: 'Year',
+    type: 'Type',
+    role: 'Role',
+    stack: 'Stack',
+    web: 'Website',
+  },
+  about: {
+    title: ['A little more', 'about me'],
+    info: 'Info',
+    years: (n: number, city: string) =>
+      `${n > 1 ? `${n} years` : 'Over a year'} writing software professionally, from ${city}.`,
+    hobbies: 'Away from the screen',
+    languages: 'Languages',
+    talk: 'Let’s talk',
+    form: 'Contact form',
+    experience: 'Experience',
+    stack: 'Stack',
+  },
+  contact: {
+    title: ['Tell me', 'what you have', 'in mind'],
+    sentTitle: ['Thank you,', 'talk soon.'],
+    sent: 'Sent',
+    sentOk: 'Your message is in. I’ll reply within one or two working days.',
+    sentMail: 'Your email app has opened with the message written; you just need to hit send.',
+    again: 'Write another message',
+    topic: 'About',
+    topicAria: 'What do you want to talk about',
+    you: 'Your details',
+    name: 'Name',
+    namePh: 'What’s your name?',
+    email: 'Email',
+    emailPh: 'you@email.com',
+    message: 'Message',
+    messagePh: 'What you need, by when, and any detail that helps.',
+    send: 'Send message',
+    sending: 'Sending…',
+    error: 'It couldn’t be sent. Try again or write to me at',
+    direct: 'Or directly',
+  },
+};
+
+const UI_BY_LANG: Record<Lang, UI> = { es, en };
+
+export function useUI() {
+  return UI_BY_LANG[useLang()];
+}
