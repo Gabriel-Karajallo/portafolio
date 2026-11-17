@@ -2,7 +2,7 @@
 import { useLang, type Lang } from '../lib/i18n';
 
 const es = {
-  nav: { work: 'Trabajo', about: 'Sobre mí', personal: 'Espacio personal', contact: 'Contacto', main: 'Principal' },
+  nav: { work: 'Trabajo', about: 'Sobre mí', personal: 'Espacio personal', contact: 'Contacto', notfound: 'Página no encontrada', main: 'Principal' },
   tools: { invert: 'Invertir color', sound: 'Sonido', on: 'sí', off: 'no', language: 'Idioma' },
   clock: (city: string, time: string) => `Hora en ${city}: ${time}`,
   cursor: { write: 'Escríbeme', view: 'Ver proyecto', send: 'Enviar', visit: 'Visitar web' },
@@ -64,6 +64,13 @@ const es = {
     open: 'Ampliar',
     draft: 'Borrador',
   },
+  notFound: {
+    code: 'Error 404',
+    title: ['Esta página', 'no existe'],
+    lead: 'Puede que el enlace esté mal escrito o que la página se haya movido.',
+    back: 'Volver al trabajo',
+    contact: 'Escríbeme',
+  },
   contact: {
     title: ['Cuéntame', 'qué tienes', 'en mente'],
     mail: 'Escríbeme',
@@ -77,7 +84,7 @@ const es = {
 type UI = typeof es;
 
 const en: UI = {
-  nav: { work: 'Work', about: 'About', personal: 'Personal space', contact: 'Contact', main: 'Main' },
+  nav: { work: 'Work', about: 'About', personal: 'Personal space', contact: 'Contact', notfound: 'Page not found', main: 'Main' },
   tools: { invert: 'Invert colours', sound: 'Sound', on: 'on', off: 'off', language: 'Language' },
   clock: (city: string, time: string) => `Time in ${city}: ${time}`,
   cursor: { write: 'Write to me', view: 'View project', send: 'Send', visit: 'Visit site' },
@@ -138,6 +145,13 @@ const en: UI = {
     },
     open: 'Enlarge',
     draft: 'Draft',
+  },
+  notFound: {
+    code: 'Error 404',
+    title: ['This page', "doesn't exist"],
+    lead: 'The link may be mistyped or the page may have moved.',
+    back: 'Back to work',
+    contact: 'Write to me',
   },
   contact: {
     title: ['Tell me', 'what you have', 'in mind'],

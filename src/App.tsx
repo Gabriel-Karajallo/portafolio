@@ -11,6 +11,7 @@ import { ProjectPanel } from './components/ProjectPanel';
 import { Roll } from './components/Roll';
 import { About } from './pages/About';
 import { Contact } from './pages/Contact';
+import { NotFound } from './pages/NotFound';
 import { Project } from './pages/Project';
 import { Work } from './pages/Work';
 import { linkTo, useRoute, type Route } from './lib/router';
@@ -26,11 +27,12 @@ const NAV: { key: 'work' | 'about' | 'personal' | 'contact'; href: string; match
   { key: 'contact', href: '/contacto', match: ['contact'] },
 ];
 
+// El tema oscuro es el de por defecto: solo se usa el claro si el visitante lo eligió.
 function readInvert() {
   try {
-    return localStorage.getItem('invert') === '1';
+    return localStorage.getItem('invert') !== '0';
   } catch {
-    return false;
+    return true;
   }
 }
 
@@ -55,6 +57,8 @@ export default function App() {
 
   // Al volver de un proyecto, la rueda se queda en ese proyecto.
   const projectIndex = route.name === 'project' ? projectSlugs.indexOf(route.slug) : -1;
+  // ruta desconocida o proyecto con un slug que no existe
+  const missing = route.name === 'notfound' || (route.name === 'project' && projectIndex < 0);
   useEffect(() => {
     if (projectIndex >= 0) setActive(projectIndex);
   }, [projectIndex]);
@@ -70,7 +74,7 @@ export default function App() {
 
   useEffect(() => {
     cardRef.current?.scrollTo(0, 0);
-    const titles = { ...ui.nav, project: projects[projectIndex]?.title ?? ui.nav.work };
+    const titles = { ...ui.nav, project: projects[projectIndex]?.title ?? ui.nav.notfound };
     document.title = `${titles[route.name]} — ${profile.name}`;
   }, [route, projectIndex, ui, projects]);
 
@@ -214,7 +218,8 @@ export default function App() {
               </Suspense>
             )}
             {route.name === 'contact' && <Contact />}
-            {route.name === 'project' && <Project slug={route.slug} />}
+            {route.name === 'project' && !missing && <Project slug={route.slug} />}
+            {missing && <NotFound />}
           </div>
 
           {route.name === 'work' && (

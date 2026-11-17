@@ -158,10 +158,14 @@ button:focus-visible .roll-c > span {
   z-index: 100;
   pointer-events: none;
 }
-.loader-bg {
+.loader-curtain {
   position: absolute;
   inset: 0;
-  background: var(--coal);
+  width: 100%;
+  height: 100%;
+}
+.loader-curtain path {
+  fill: var(--coal);
 }
 .loader-stage {
   position: absolute;
@@ -173,7 +177,7 @@ button:focus-visible .roll-c > span {
 }
 .loader-silwrap {
   width: clamp(96px, 9vw, 140px);
-  margin: 0 clamp(22px, 3vw, 40px);
+  margin: 0 clamp(24px, 3vw, 40px);
   display: grid;
   place-items: center;
   overflow: hidden;
@@ -206,39 +210,65 @@ button:focus-visible .roll-c > span {
 .loader-side--r {
   align-items: flex-start;
 }
+.loader-side {
+  will-change: transform;
+}
+/* cada línea sale y entra desde detrás de su propia máscara */
+.loader-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 2px;
+}
+.loader-mask > span {
+  display: block;
+}
 .loader-year {
   color: color-mix(in oklab, var(--chalk) 55%, transparent);
 }
 .loader-word {
-  color: var(--accent);
+  color: var(--chalk);
   font-family: var(--sans);
-  font-size: 15px;
+  font-size: 14px;
+  line-height: 20px;
   font-weight: 600;
   letter-spacing: 0.02em;
 }
-.loader-line {
+.loader-foot {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 16px;
+  color: color-mix(in oklab, var(--chalk) 55%, transparent);
+  font-variant-numeric: tabular-nums;
+}
+.loader-side--l .loader-word {
+  padding-right: 0.3em;
+}
+.loader-side--r .loader-word {
+  padding-left: 0.3em;
+}
+.loader-count {
+  min-width: 3ch;
+  text-align: right;
+}
+.loader-track {
+  flex: 1;
   height: 1px;
-  background: var(--accent);
+  background: color-mix(in oklab, var(--chalk) 14%, transparent);
+  overflow: hidden;
+}
+.loader-bar {
+  display: block;
+  height: 100%;
+  background: var(--chalk);
   transform: scaleX(0);
-}
-.loader-tear {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: calc(50% + 34px);
-  background: var(--accent);
-  opacity: 0;
-  visibility: hidden;
-}
-.loader-tear--top {
-  top: 0;
-}
-.loader-tear--bottom {
-  bottom: 0;
+  transform-origin: left;
 }
 
 /* ---------- Marco ---------- */

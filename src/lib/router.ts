@@ -5,7 +5,8 @@ export type Route =
   | { name: 'about' }
   | { name: 'personal' }
   | { name: 'contact' }
-  | { name: 'project'; slug: string };
+  | { name: 'project'; slug: string }
+  | { name: 'notfound' };
 
 function parse(path: string): Route {
   const p = path.replace(/\/+$/, '') || '/';
@@ -14,7 +15,8 @@ function parse(path: string): Route {
   if (p === '/contacto') return { name: 'contact' };
   const m = p.match(/^\/proyecto\/([\w-]+)$/);
   if (m) return { name: 'project', slug: m[1] };
-  return { name: 'work' }; // la portada es «Trabajo»
+  if (p === '/') return { name: 'work' }; // la portada es «Trabajo»
+  return { name: 'notfound' };
 }
 
 const listeners = new Set<() => void>();

@@ -1,3 +1,8 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    { "source": "/sobre-mi", "destination": "/index.html" },
+    { "source": "/espacio-personal", "destination": "/index.html" },
+    { "source": "/contacto", "destination": "/index.html" },
+    { "source": "/proyecto/:slug", "destination": "/index.html" }
+  ]
 }
