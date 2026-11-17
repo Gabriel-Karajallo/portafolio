@@ -3,12 +3,14 @@ import { useSyncExternalStore } from 'react';
 export type Route =
   | { name: 'work' }
   | { name: 'about' }
+  | { name: 'personal' }
   | { name: 'contact' }
   | { name: 'project'; slug: string };
 
 function parse(path: string): Route {
   const p = path.replace(/\/+$/, '') || '/';
   if (p === '/sobre-mi') return { name: 'about' };
+  if (p === '/espacio-personal') return { name: 'personal' };
   if (p === '/contacto') return { name: 'contact' };
   const m = p.match(/^\/proyecto\/([\w-]+)$/);
   if (m) return { name: 'project', slug: m[1] };

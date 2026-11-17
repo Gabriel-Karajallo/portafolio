@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type CSSProperties, type MouseEvent } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useRef, useState, type CSSProperties, type MouseEvent } from 'react';
 import { flushSync } from 'react-dom';
 import { profile, projectSlugs, useContent } from './data/content';
 import { useUI } from './data/ui';
@@ -16,9 +16,13 @@ import { Work } from './pages/Work';
 import { linkTo, useRoute, type Route } from './lib/router';
 import { hoverTick, setSound } from './lib/sound';
 
-const NAV: { key: 'work' | 'about' | 'contact'; href: string; match: Route['name'][] }[] = [
+// El espacio personal arrastra galería, lightbox y Motion: se carga solo al visitarlo.
+const PersonalSpace = lazy(() => import('./pages/PersonalSpace').then((m) => ({ default: m.PersonalSpace })));
+
+const NAV: { key: 'work' | 'about' | 'personal' | 'contact'; href: string; match: Route['name'][] }[] = [
   { key: 'work', href: '/', match: ['work', 'project'] },
   { key: 'about', href: '/sobre-mi', match: ['about'] },
+  { key: 'personal', href: '/espacio-personal', match: ['personal'] },
   { key: 'contact', href: '/contacto', match: ['contact'] },
 ];
 
@@ -204,6 +208,11 @@ export default function App() {
           <div className="view" key={routeKey}>
             {route.name === 'work' && <Work active={active} setActive={setActive} ready={loaded} />}
             {route.name === 'about' && <About />}
+            {route.name === 'personal' && (
+              <Suspense fallback={null}>
+                <PersonalSpace />
+              </Suspense>
+            )}
             {route.name === 'contact' && <Contact />}
             {route.name === 'project' && <Project slug={route.slug} />}
           </div>

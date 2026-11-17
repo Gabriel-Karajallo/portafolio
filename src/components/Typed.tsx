@@ -1,4 +1,4 @@
-import { createElement, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { createElement, useEffect, useMemo, useRef, useState, type CSSProperties, type HTMLAttributes, type ReactNode } from 'react';
 
 /** Marca el elemento como visible la primera vez que entra en pantalla. */
 export function useInView<T extends Element>(margin = '0px 0px -10% 0px') {
@@ -30,9 +30,15 @@ export function useInView<T extends Element>(margin = '0px 0px -10% 0px') {
  * Texto corrido (frases, párrafos): entra entero, subiendo y apareciendo, al entrar en pantalla.
  * El letra a letra se reserva para textos cortos (etiquetas, nombres).
  */
-export function Fade({ text, as = 'span', className = '' }: Omit<Props, 'children'>) {
+export function Fade({
+  text,
+  as = 'span',
+  className = '',
+  children,
+  ...rest
+}: Omit<Props, 'text'> & { text?: string } & Omit<HTMLAttributes<HTMLElement>, 'className' | 'children'>) {
   const [ref, inView] = useInView<HTMLElement>();
-  return createElement(as, { ref, className: `fade ${inView ? 'is-in' : ''} ${className}` }, text);
+  return createElement(as, { ...rest, ref, className: `fade ${inView ? 'is-in' : ''} ${className}` }, children ?? text);
 }
 
 type Props = {

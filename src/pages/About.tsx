@@ -1,6 +1,8 @@
+import { useState, type CSSProperties } from 'react';
 import { profile, useContent } from '../data/content';
 import { useUI } from '../data/ui';
 import { AboutPanel } from '../components/AboutPanel';
+import { HobbyPreview } from '../components/HobbyPreview';
 import { Roll } from '../components/Roll';
 import { RevealTitle } from '../components/RevealTitle';
 import { Fade, Typed } from '../components/Typed';
@@ -10,10 +12,23 @@ function Label({ text }: { text: string }) {
   return <Typed as="h2" className="mono label" text={text} />;
 }
 
+/** Envuelve en <em> el fragmento destacado de la intro. */
+function Highlight({ text, mark }: { text: string; mark: string }) {
+  const at = text.indexOf(mark);
+  if (at < 0) return <>{text}</>;
+  return (
+    <>
+      {text.slice(0, at)}
+      <em>{mark}</em>
+      {text.slice(at + mark.length)}
+    </>
+  );
+}
+
 export function About() {
-  const { hobbies, hobbiesIntro, intro, languages, city } = useContent();
+  const { hobbies, intro, introHighlight, languages, city, country } = useContent();
   const t = useUI().about;
-  const years = new Date().getFullYear() - profile.since;
+  const [hobby, setHobby] = useState(-1);
   const social = [
     { name: 'LinkedIn', href: profile.linkedin },
     { name: 'GitHub', href: profile.github },
@@ -28,36 +43,54 @@ export function About() {
 
       <section className="row">
         <Label text={t.info} />
-        <div className="prose">
-          <Fade as="p" text={intro} />
-          <Fade as="p" text={t.years(years, city)} />
+        <div className="about-info">
+          <Fade as="p" className="about-statement" text={intro}>
+            <Highlight text={intro} mark={introHighlight} />
+          </Fade>
+          <dl className="facts">
+            <Fade as="div" style={{ '--i': 0 } as CSSProperties}>
+              <dt className="mono">{t.factRole}</dt>
+              <dd>{t.role}</dd>
+            </Fade>
+            <Fade as="div" style={{ '--i': 1 } as CSSProperties}>
+              <dt className="mono">{t.factBase}</dt>
+              <dd>
+                {city}, {country}
+              </dd>
+            </Fade>
+            <Fade as="div" style={{ '--i': 2 } as CSSProperties}>
+              <dt className="mono">{t.languages}</dt>
+              <dd>
+                {languages.map((l) => (
+                  <span key={l.name}>
+                    {l.name} <span className="muted">{l.level}</span>
+                  </span>
+                ))}
+              </dd>
+            </Fade>
+          </dl>
         </div>
       </section>
 
       <section className="row">
-        <Label text={t.hobbies} />
-        <div className="hobbies-wrap">
-          <Fade as="p" className="lead hobbies-intro" text={hobbiesIntro} />
-          <ul className="hobbies">
-            {hobbies.map((h, i) => (
-              <li key={h.name}>
-                <Typed className="mono muted" text={String(i + 1).padStart(2, '0')} />
+        <div className="about-aside">
+          <Label text={t.hobbies} />
+          <HobbyPreview items={hobbies} active={hobby} />
+        </div>
+        <ul className="hobbies" onPointerLeave={() => setHobby(-1)}>
+          {hobbies.map((h, i) => (
+            <Fade
+              as="li"
+              key={h.name}
+              style={{ '--i': i } as CSSProperties}
+              onPointerEnter={(e) => e.pointerType === 'mouse' && setHobby(i)}
+            >
+              <span className="hobby-head">
+                <span className="mono muted">{String(i + 1).padStart(2, '0')}</span>
                 <Typed className="hobby-name" text={h.name} />
-                <Fade className="hobby-text muted" text={h.text} />
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="row">
-        <Label text={t.languages} />
-        <ul className="list">
-          {languages.map((l) => (
-            <li key={l.name}>
-              <Typed text={l.name} />
-              <Typed className="muted" text={l.level} />
-            </li>
+              </span>
+              <span className="hobby-text muted">{h.text}</span>
+            </Fade>
           ))}
         </ul>
       </section>

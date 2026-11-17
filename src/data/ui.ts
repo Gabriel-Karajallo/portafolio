@@ -2,7 +2,7 @@
 import { useLang, type Lang } from '../lib/i18n';
 
 const es = {
-  nav: { work: 'Trabajo', about: 'Sobre mí', contact: 'Contacto', main: 'Principal' },
+  nav: { work: 'Trabajo', about: 'Sobre mí', personal: 'Espacio personal', contact: 'Contacto', main: 'Principal' },
   tools: { invert: 'Invertir color', sound: 'Sonido', on: 'sí', off: 'no', language: 'Idioma' },
   clock: (city: string, time: string) => `Hora en ${city}: ${time}`,
   cursor: { write: 'Escríbeme', view: 'Ver proyecto', send: 'Enviar', visit: 'Visitar web' },
@@ -33,14 +33,37 @@ const es = {
   about: {
     title: ['Un poco más', 'sobre mí'],
     info: 'Info',
-    years: (n: number, city: string) =>
-      `${n > 1 ? `${n} años` : 'Más de un año'} escribiendo software de forma profesional, desde ${city}.`,
+    role: 'Desarrollador full-stack',
+    factRole: 'Rol',
+    factBase: 'Base',
     hobbies: 'Fuera de la pantalla',
     languages: 'Idiomas',
     talk: 'Hablemos',
     form: 'Formulario',
     experience: 'Experiencia',
     stack: 'Stack',
+  },
+  personal: {
+    title: ['Espacio', 'personal'],
+    lead: 'Aquí actualizo lo que voy haciendo o publico las cosas que me gustan, desde mi rutina hasta las fotos que tienen un significado para mí.',
+    routine: {
+      label: 'Rutina',
+      title: 'Cómo trabajo',
+      lead: 'Un día normal, más o menos.',
+      day: 'Un día cualquiera',
+    },
+    photos: {
+      label: 'Fotografía',
+      title: 'Algunas de mis fotos favoritas',
+      lead: 'Hechas en mis viajes, sobre todo por Escocia e Italia.',
+    },
+    events: {
+      label: 'Eventos',
+      title: 'Donde he estado',
+      lead: 'Conferencias, conciertos y planes que me han dejado algo.',
+    },
+    open: 'Ampliar',
+    draft: 'Borrador',
   },
   contact: {
     title: ['Cuéntame', 'qué tienes', 'en mente'],
@@ -68,7 +91,7 @@ const es = {
 type UI = typeof es;
 
 const en: UI = {
-  nav: { work: 'Work', about: 'About', contact: 'Contact', main: 'Main' },
+  nav: { work: 'Work', about: 'About', personal: 'Personal space', contact: 'Contact', main: 'Main' },
   tools: { invert: 'Invert colours', sound: 'Sound', on: 'on', off: 'off', language: 'Language' },
   clock: (city: string, time: string) => `Time in ${city}: ${time}`,
   cursor: { write: 'Write to me', view: 'View project', send: 'Send', visit: 'Visit site' },
@@ -99,14 +122,37 @@ const en: UI = {
   about: {
     title: ['A little more', 'about me'],
     info: 'Info',
-    years: (n: number, city: string) =>
-      `${n > 1 ? `${n} years` : 'Over a year'} writing software professionally, from ${city}.`,
+    role: 'Full-stack developer',
+    factRole: 'Role',
+    factBase: 'Based in',
     hobbies: 'Away from the screen',
     languages: 'Languages',
     talk: 'Let’s talk',
     form: 'Contact form',
     experience: 'Experience',
     stack: 'Stack',
+  },
+  personal: {
+    title: ['Personal', 'space'],
+    lead: 'This is where I share what I’m up to and the things I like, from my routine to the photos that mean something to me.',
+    routine: {
+      label: 'Routine',
+      title: 'How I work',
+      lead: 'A normal day, more or less.',
+      day: 'Any given day',
+    },
+    photos: {
+      label: 'Photography',
+      title: 'Some of my favourite photos',
+      lead: 'Taken on my travels, mostly around Scotland and Italy.',
+    },
+    events: {
+      label: 'Events',
+      title: 'Where I’ve been',
+      lead: 'Conferences, concerts and plans that stayed with me.',
+    },
+    open: 'Enlarge',
+    draft: 'Draft',
   },
   contact: {
     title: ['Tell me', 'what you have', 'in mind'],

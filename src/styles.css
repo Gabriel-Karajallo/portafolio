@@ -1071,40 +1071,463 @@ button:focus-visible .roll-c > span {
 .list--plain li {
   display: block;
 }
-.hobbies-intro {
-  margin-bottom: 28px;
+.about {
+  /* columnas compartidas por la ficha y las aficiones */
+  --col-gap: clamp(20px, 2.4vw, 40px);
+  /* la primera, más ancha: cabe el nombre de afición más largo en una línea */
+  --cols: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr);
 }
-.hobbies li {
+.about-info {
   display: grid;
-  grid-template-columns: 36px 1fr;
-  column-gap: 12px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--line);
+  gap: 40px;
+}
+/* La etiqueta acompaña a su sección mientras se recorre */
+.about .label {
+  position: sticky;
+  top: 84px;
+  align-self: start;
+}
+/* La intro como declaración: grande, ajustada, con el carácter en color */
+.about-statement {
+  margin: 0;
+  max-width: 34ch;
+  font-size: clamp(19px, 1.35vw, 23px);
+  font-weight: 400;
+  line-height: 1.38;
+  letter-spacing: -0.015em;
+  text-wrap: pretty;
+}
+.about-statement em {
+  font-style: normal;
+  color: var(--accent);
+}
+/* Ficha: tres datos cortos en columnas, etiqueta mono encima */
+.facts {
+  display: grid;
+  grid-template-columns: var(--cols);
+  column-gap: var(--col-gap);
+  row-gap: 20px;
+  margin: 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.facts > div {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  transition-delay: calc(0.15s + var(--i) * 70ms);
+}
+.facts dt {
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+.facts dd {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* Aficiones como índice: número · nombre · descripción en la misma línea */
+.hobbies {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 .hobbies li:first-child {
-  padding-top: 0;
+  padding-top: 2px;
 }
-.hobbies li:last-child {
-  border-bottom: 0;
+.hobbies li {
+  position: relative;
+  display: grid;
+  /* mismas tres columnas que la ficha: la descripción arranca bajo «Base» */
+  grid-template-columns: var(--cols);
+  align-items: baseline;
+  column-gap: var(--col-gap);
+  padding: 13px 0 14px;
+  border-bottom: 1px solid var(--line);
+  transition-delay: calc(var(--i) * 60ms);
+}
+/* línea de acento que se dibuja desde la izquierda al pasar el ratón */
+.hobbies li::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease);
+}
+.hobby-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
 }
 .hobbies .mono {
-  padding-top: 6px;
+  flex: none;
+  width: 18px;
+  font-size: 11px;
 }
 .hobby-name {
-  font-size: 22px;
+  font-size: clamp(19px, 1.35vw, 22px);
   font-weight: 500;
   letter-spacing: -0.025em;
   transition: transform 0.5s var(--ease);
 }
 .hobby-text {
-  grid-column: 2;
-  font-size: 15px;
+  grid-column: 2 / -1;
+  max-width: 44ch;
+  font-size: 14px;
+  line-height: 1.45;
+  text-wrap: pretty;
 }
-@media (hover: hover) {
+/* Columna de la etiqueta de aficiones: etiqueta + foto de la fila activa, fija al recorrer */
+.about-aside {
+  position: sticky;
+  top: 84px;
+  align-self: start;
+  display: grid;
+  gap: 22px;
+}
+.about-aside .label {
+  position: static;
+}
+/* Foto de la afición con el ratón encima: fuera del texto, sin taparlo.
+   Cada una con su ligero giro, que cambia al pasar de una fila a otra. */
+.hobby-preview {
+  position: relative;
+  display: none;
+  width: clamp(160px, 12.5vw, 240px);
+  aspect-ratio: 4 / 5;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--slot);
+  opacity: 0;
+  transform: translateY(14px) rotate(calc(var(--tilt) - 4deg)) scale(0.96);
+  transform-origin: 50% 0;
+  transition:
+    opacity 0.3s var(--ease-out),
+    transform 0.6s var(--ease-out);
+  pointer-events: none;
+}
+.hobby-preview.is-on {
+  opacity: 1;
+  transform: rotate(var(--tilt));
+}
+.hobby-preview img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* cambio de foto directo: lo que se mueve es el giro del marco */
+  opacity: 0;
+}
+.hobby-preview img.is-active {
+  opacity: 1;
+}
+@media (hover: hover) and (pointer: fine) {
+  .hobby-preview {
+    display: block;
+  }
   .hobbies li:hover .hobby-name {
-    transform: translateX(8px);
+    transform: translateX(6px);
+  }
+  .hobbies li:hover::after {
+    transform: scaleX(1);
   }
 }
+/* ---------- Espacio personal ---------- */
+.personal .about-title {
+  margin-bottom: 28px;
+}
+.ps-intro {
+  margin: 0 0 88px var(--indent);
+  max-width: 44ch;
+  font-size: clamp(16px, 1.1vw, 18px);
+  line-height: 1.5;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+/* Cada bloque: número y nombre a la izquierda; título, texto y contenido a la derecha */
+.ps-section {
+  row-gap: 32px;
+}
+.ps-label {
+  grid-row: span 2;
+}
+.ps-label .label {
+  position: sticky;
+  top: 84px;
+}
+.ps-head,
+.ps-body {
+  grid-column: 2;
+}
+.ps-head {
+  display: grid;
+  gap: 8px;
+  max-width: 46ch;
+}
+.ps-title {
+  margin: 0;
+  font-size: clamp(22px, 1.7vw, 28px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+.ps-lead {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+/* la galería ocupa todo el ancho, debajo de la cabecera */
+.ps-section--wide .ps-label {
+  grid-row: span 1;
+}
+.ps-album {
+  grid-column: 1 / -1;
+}
+
+/* Rutina: detalle de la parte activa, barra horaria y leyenda */
+.routine {
+  display: grid;
+  gap: 28px;
+}
+.rt-detail {
+  min-height: 132px;
+}
+.rt-detail p {
+  margin: 0;
+}
+.rt-time {
+  font-size: 11px;
+  color: var(--accent);
+}
+.rt-name {
+  margin-top: 8px !important;
+  font-size: clamp(30px, 2.6vw, 42px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.rt-text {
+  margin-top: 12px !important;
+  max-width: 46ch;
+  font-size: 15px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+.rt-day {
+  margin: 0 0 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+.rt-track {
+  position: relative;
+  height: 44px;
+  /* las horas libres: una línea fina de fondo */
+  background: linear-gradient(var(--line), var(--line)) center / 100% 1px no-repeat;
+}
+.rt-seg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  padding: 0 1.5px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.rt-seg::before {
+  content: '';
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  background: color-mix(in oklab, var(--ink) 18%, transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition:
+    transform 0.9s var(--ease) calc(0.15s + var(--i) * 90ms),
+    background-color 0.3s var(--ease);
+}
+.routine.is-in .rt-seg::before {
+  transform: scaleX(1);
+}
+.rt-seg.is-on::before {
+  background: var(--accent);
+}
+.rt-seg:focus-visible {
+  outline: none;
+}
+.rt-seg:focus-visible::before {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .rt-seg:not(.is-on):hover::before {
+    background: color-mix(in oklab, var(--ink) 34%, transparent);
+  }
+}
+.rt-ticks {
+  position: relative;
+  height: 14px;
+  margin-top: 8px;
+}
+.rt-ticks span {
+  position: absolute;
+  top: 0;
+  translate: -50% 0;
+  font-size: 10px;
+  color: var(--muted);
+}
+.rt-ticks span:first-child {
+  translate: 0 0;
+}
+.rt-ticks span:last-child {
+  translate: -100% 0;
+}
+.rt-legend {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--col-gap, 32px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rt-legend button {
+  display: grid;
+  grid-template-columns: 26px 1fr auto;
+  align-items: baseline;
+  gap: 8px;
+  width: 100%;
+  padding: 11px 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.rt-legend .mono {
+  font-size: 10.5px;
+}
+.rt-legend-name {
+  font-size: 15px;
+  transition: color 0.3s var(--ease);
+}
+.rt-legend button.is-on .rt-legend-name {
+  color: var(--accent);
+}
+
+.pg-album .react-photo-album--photo {
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--slot);
+  animation: view-in 0.7s var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+.pg-album .react-photo-album--image {
+  object-fit: cover;
+  transition: scale 0.8s var(--ease-out), filter 0.5s var(--ease);
+}
+.pg-album .react-photo-album--button {
+  padding: 0;
+  outline-offset: 3px;
+}
+/* pie que sube desde abajo al pasar el ratón */
+.pg-caption {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 28px 14px 12px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.55));
+  color: #f3eee6;
+  font-size: 14px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s var(--ease-out), transform 0.45s var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .pg-album .react-photo-album--photo:hover .react-photo-album--image {
+    scale: 1.04;
+  }
+  .pg-album .react-photo-album--photo:hover .pg-caption {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (hover: none) {
+  .pg-caption {
+    opacity: 1;
+    transform: none;
+  }
+}
+.pg-draft {
+  padding: 2px 6px;
+  border: 1px dashed currentColor;
+  border-radius: 4px;
+  font-size: 10px;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* Eventos: fecha · nombre · tipo y lugar, en las columnas de la ficha */
+.pg-events {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pg-events li > * {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr) minmax(0, 1fr);
+  align-items: baseline;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.pg-events li:first-child > * {
+  padding-top: 2px;
+}
+.pg-events .mono {
+  font-size: 11px;
+}
+.pg-event-name {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.pg-events a .pg-event-name::after {
+  content: '↗';
+  font-size: 0.75em;
+  color: var(--muted);
+}
+
+/* Lightbox: la tipografía de la web */
+.yarl__slide_title {
+  font-family: var(--display);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.yarl__slide_description,
+.yarl__counter {
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -1460,15 +1883,25 @@ button:focus-visible .roll-c > span {
 /* la foto ocupa lo que dejan libre experiencia y stack */
 .apanel-photo {
   flex: 1 1 0;
-  min-height: 110px;
-  max-height: 380px;
+  min-height: 130px;
+  max-height: 520px;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
 }
 .apanel-photo .slot--portrait {
+  flex: 1 1 0;
+  min-height: 0;
   width: auto;
   max-width: 100%;
-  height: 100%;
+  height: auto;
   margin: 0;
+}
+.apanel-caption {
+  flex: none;
+  font-size: 10.5px;
 }
 .apanel-block {
   flex: none;
@@ -1881,6 +2314,10 @@ button:focus-visible .roll-c > span {
   .nav {
     padding: 18px 16px;
   }
+  /* cuatro enlaces: menos aire entre ellos para que quepan en 375 px */
+  .nav-links {
+    gap: 16px;
+  }
   .nav-mail {
     display: none;
   }
@@ -1933,6 +2370,7 @@ button:focus-visible .roll-c > span {
     max-height: none;
   }
   .about-mobile .apanel-photo .slot--portrait {
+    flex: none;
     width: 70%;
     height: auto;
   }
@@ -1959,6 +2397,52 @@ button:focus-visible .roll-c > span {
   }
   .list li {
     grid-template-columns: 96px 1fr;
+  }
+  .facts {
+    grid-template-columns: 1fr 1fr;
+  }
+  .about .label,
+  .about-aside {
+    position: static;
+  }
+  .about-aside .hobby-preview {
+    display: none;
+  }
+  .ps-section {
+    row-gap: 18px;
+  }
+  .ps-label {
+    grid-row: auto;
+  }
+  .ps-label .label {
+    position: static;
+  }
+  .ps-head,
+  .ps-body,
+  .ps-album {
+    grid-column: 1;
+  }
+  .ps-intro {
+    margin-bottom: 56px;
+  }
+  .rt-detail {
+    min-height: 150px;
+  }
+  .rt-legend {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 20px;
+  }
+  .pg-events li > * {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .hobbies li {
+    grid-template-columns: 1fr;
+    row-gap: 4px;
+  }
+  .hobby-text {
+    grid-column: 1;
+    padding-left: 32px;
   }
   .slot--portrait {
     width: 70%;

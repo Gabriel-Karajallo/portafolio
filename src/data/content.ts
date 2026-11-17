@@ -26,7 +26,8 @@ export const profile = {
 // mensaje ya escrito.
 export const contactEndpoint = ''; // TODO(Gabriel)
 
-export const stack = ['React', 'TypeScript', 'Angular', 'React Native', 'C#', '.NET', 'SQL Server', 'MySQL', 'Oracle', 'Git'];
+// Lo que no se traduce; la lista completa de cada idioma está en su contenido (`stack`).
+const baseStack = ['React', 'TypeScript', 'Angular', 'React Native', 'C#', '.NET', 'SQL Server', 'MySQL'];
 
 export type Project = {
   slug: string;
@@ -155,12 +156,14 @@ const gestionaEn: Project = {
 const es = {
   city: 'Sevilla',
   country: 'España',
-  role: 'Programador full-stack',
+  role: 'Desarrollador full-stack',
+  stack: [...baseStack, 'Inteligencia Artificial', 'Git'],
   photoAlt: 'Gabriel Karajallo en Edimburgo',
+  photoCaption: 'Edimburgo',
   contactTopics: ['Un proyecto', 'Una oferta de trabajo', 'Otra cosa'],
   projects: [gestionaEs],
   experience: [
-    { when: '2025 — hoy', company: 'Wortach', role: 'Programador full-stack' },
+    { when: '2025 — hoy', company: 'Wortach', role: 'Desarrollador full-stack' },
     { when: '2024', company: 'Insinno España', role: 'Desarrollador front-end' },
     { when: '2022 — 2024', company: 'I.E.S. Antonio Machado', role: 'CFGS Administración de Sistemas en Red' },
   ],
@@ -169,14 +172,15 @@ const es = {
     { name: 'Inglés', level: 'B1' },
   ],
   intro:
-    'Hola, soy Gabriel. Empecé montando servidores y redes; hoy construyo las aplicaciones que corren encima, del esquema en SQL a la última animación de la interfaz.',
+    'Hola, soy Gabriel. Me defino como alguien creativo, resolutivo y con iniciativa. Disfruto de los retos, de crear cosas nuevas y de dar siempre lo mejor de mí en aquello que hago.',
+  // fragmento de la intro que se destaca en color
+  introHighlight: 'creativo, resolutivo y con iniciativa',
   motto: 'Más allá del código',
-  hobbiesIntro: 'En resumen: vivir experiencias especiales que me dejen un buen recuerdo.',
   hobbies: [
-    { name: 'Viajar', text: 'Conocer sitios nuevos y volver con historias que contar.' },
-    { name: 'Deporte', text: 'Moverme, desconectar y volver con la cabeza despejada.' },
-    { name: 'Cine y videojuegos', text: 'Buenas historias, en la pantalla grande o con el mando en la mano.' },
-    { name: 'Perros', text: 'La mejor compañía para cualquier plan.' },
+    { name: 'Viajar', img: '/hobbies/viajar.webp', alt: 'Atardecer sobre un lago entre montañas', text: 'Conocer sitios nuevos y volver con historias que contar.' },
+    { name: 'Deporte', img: '/hobbies/deporte.webp', alt: 'Gabriel en guardia en un ring de boxeo', text: 'Moverme, desconectar y volver con la cabeza despejada.' },
+    { name: 'Cine y videojuegos', img: '/hobbies/cine.webp', alt: 'Sala de cine con la pantalla encendida', text: 'Buenas historias, en la pantalla grande o con el mando en la mano.' },
+    { name: 'Fotografía', img: '/hobbies/fotografia.webp', alt: 'Agujas góticas y el cartel de The Witchery en Edimburgo', text: 'Capturar momentos y lugares para volver a ellos cuando quiera.' },
   ],
 };
 
@@ -186,7 +190,9 @@ const en: Content = {
   city: 'Seville',
   country: 'Spain',
   role: 'Full-stack developer',
+  stack: [...baseStack, 'Artificial Intelligence', 'Git'],
   photoAlt: 'Gabriel Karajallo in Edinburgh',
+  photoCaption: 'Edinburgh',
   contactTopics: ['A project', 'A job offer', 'Something else'],
   projects: [gestionaEn],
   experience: [
@@ -203,14 +209,14 @@ const en: Content = {
     { name: 'English', level: 'B1' },
   ],
   intro:
-    'Hi, I’m Gabriel. I started out setting up servers and networks; today I build the applications that run on top of them, from the SQL schema to the last animation in the interface.',
+    'Hi, I’m Gabriel. I see myself as someone creative, resourceful and proactive. I enjoy challenges, creating new things and always giving my best in everything I do.',
+  introHighlight: 'creative, resourceful and proactive',
   motto: 'Beyond the code',
-  hobbiesIntro: 'In short: living special experiences that leave me with good memories.',
   hobbies: [
-    { name: 'Travel', text: 'Discovering new places and coming back with stories to tell.' },
-    { name: 'Sport', text: 'Moving, switching off and coming back with a clear head.' },
-    { name: 'Film and video games', text: 'Good stories, on the big screen or controller in hand.' },
-    { name: 'Dogs', text: 'The best company for any plan.' },
+    { name: 'Travel', img: '/hobbies/viajar.webp', alt: 'Sunset over a lake between mountains', text: 'Discovering new places and coming back with stories to tell.' },
+    { name: 'Sport', img: '/hobbies/deporte.webp', alt: 'Gabriel on guard in a boxing ring', text: 'Moving, switching off and coming back with a clear head.' },
+    { name: 'Film and video games', img: '/hobbies/cine.webp', alt: 'Cinema hall with the screen lit up', text: 'Good stories, on the big screen or controller in hand.' },
+    { name: 'Photography', img: '/hobbies/fotografia.webp', alt: 'Gothic spires and The Witchery sign in Edinburgh', text: 'Capturing moments and places to come back to whenever I want.' },
   ],
 };
 

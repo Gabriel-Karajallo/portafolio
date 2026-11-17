@@ -1,12 +1,12 @@
 import type { CSSProperties } from 'react';
-import { profile, stack, useContent } from '../data/content';
+import { profile, useContent } from '../data/content';
 import { useUI } from '../data/ui';
 import { ImageSlot } from './ImageSlot';
 import { Fade, Typed, useInView } from './Typed';
 
 /** La foto se abre desde el centro hacia los lados al entrar en pantalla. */
 function Photo() {
-  const { photoAlt } = useContent();
+  const { photoAlt, photoCaption } = useContent();
   const [ref, inView] = useInView<HTMLDivElement>();
   return (
     <figure ref={ref} className={`apanel-photo photo-reveal ${inView ? 'is-in' : ''}`}>
@@ -17,13 +17,14 @@ function Photo() {
         label="Foto pendiente"
         className="slot--portrait"
       />
+      <figcaption className="mono muted apanel-caption">{photoCaption}</figcaption>
     </figure>
   );
 }
 
 /** Panel izquierdo de «Sobre mí»: foto, experiencia y stack. */
 export function AboutPanel({ className = '' }: { className?: string }) {
-  const { experience } = useContent();
+  const { experience, stack } = useContent();
   const ui = useUI();
   return (
     <div className={`apanel ${className}`}>

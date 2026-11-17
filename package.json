@@ -10,8 +10,11 @@
   },
   "dependencies": {
     "gsap": "^3.13.0",
+    "motion": "^14.14.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-photo-album": "^3.6.2",
+    "yet-another-react-lightbox": "^3.33.1"
   },
   "devDependencies": {
     "@types/react": "^19.1.0",
