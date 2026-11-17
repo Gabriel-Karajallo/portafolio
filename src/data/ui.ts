@@ -5,7 +5,8 @@ const es = {
   nav: { work: 'Trabajo', about: 'Sobre mí', personal: 'Espacio personal', contact: 'Contacto', notfound: 'Página no encontrada', main: 'Principal', menu: 'Menú', close: 'Cerrar' },
   tools: { invert: 'Invertir color', sound: 'Sonido', on: 'sí', off: 'no', language: 'Idioma' },
   clock: (city: string, time: string) => `Hora en ${city}: ${time}`,
-  cursor: { write: 'Escríbeme', view: 'Ver proyecto', send: 'Enviar', visit: 'Visitar web' },
+  cursor: { write: 'Escríbeme', view: 'Ver proyecto', send: 'Enviar', visit: 'Visitar web', download: 'Descargar' },
+  cv: { download: 'Descargar CV', label: 'Currículum', file: 'Gabriel-Karajallo-CV.pdf' },
   work: {
     aria: 'Proyectos',
     soonKind: 'Próximamente',
@@ -87,7 +88,8 @@ const en: UI = {
   nav: { work: 'Work', about: 'About', personal: 'Personal space', contact: 'Contact', notfound: 'Page not found', main: 'Main', menu: 'Menu', close: 'Close' },
   tools: { invert: 'Invert colours', sound: 'Sound', on: 'on', off: 'off', language: 'Language' },
   clock: (city: string, time: string) => `Time in ${city}: ${time}`,
-  cursor: { write: 'Write to me', view: 'View project', send: 'Send', visit: 'Visit site' },
+  cursor: { write: 'Write to me', view: 'View project', send: 'Send', visit: 'Visit site', download: 'Download' },
+  cv: { download: 'Download CV', label: 'Résumé', file: 'Gabriel-Karajallo-CV.pdf' },
   work: {
     aria: 'Projects',
     soonKind: 'Coming soon',

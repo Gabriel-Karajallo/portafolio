@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { profile } from '../data/content';
 import { useUI } from '../data/ui';
 import { Roll } from '../components/Roll';
+import { CvButton } from '../components/CvButton';
 import { RevealTitle } from '../components/RevealTitle';
 import { Fade, Typed } from '../components/Typed';
 import { tick } from '../lib/sound';
@@ -55,6 +56,13 @@ export function Contact() {
           <button type="button" className="mono copy-btn" onClick={copy} aria-live="polite">
             <Roll text={copied ? t.copied : t.copy} /> {copied ? '✓' : '⧉'}
           </button>
+        </div>
+      </section>
+
+      <section className="row">
+        <Typed as="h2" className="mono label" text={ui.cv.label} />
+        <div>
+          <CvButton />
         </div>
       </section>
 

@@ -219,7 +219,7 @@ export default function App() {
             ) : project ? (
               <ProjectPanel p={project} />
             ) : (
-              <HomePanel ready={loaded} />
+              <HomePanel ready={loaded} cv={route.name !== 'contact'} />
             )}
           </div>
 

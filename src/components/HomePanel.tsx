@@ -1,9 +1,13 @@
 import type { CSSProperties } from 'react';
 import { profile, useContent } from '../data/content';
 import { Clock } from './Clock';
+import { CvButton } from './CvButton';
 
-/** Panel izquierdo de portada y contacto: el nombre en grande y, debajo, el reloj. */
-export function HomePanel({ ready }: { ready: boolean }) {
+/**
+ * Panel izquierdo de portada y contacto: el nombre en grande y, debajo, el reloj.
+ * `cv` muestra el botón del currículum (en Contacto ya está en la página).
+ */
+export function HomePanel({ ready, cv = true }: { ready: boolean; cv?: boolean }) {
   const { role } = useContent();
   const [first, ...rest] = profile.name.split(' ');
   const lines = [first, rest.join(' ')];
@@ -19,6 +23,7 @@ export function HomePanel({ ready }: { ready: boolean }) {
           ))}
         </h1>
         <p className="mono hpanel-role">{role}</p>
+        {cv && <CvButton className="hpanel-cv" />}
       </div>
       <Clock ready={ready} />
     </div>

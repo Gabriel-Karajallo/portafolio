@@ -1684,7 +1684,8 @@ button:focus-visible .roll-c > span {
   margin: 0;
   font-size: 15px;
 }
-.copy-btn {
+.copy-btn,
+.cv-btn {
   display: inline-flex;
   gap: 8px;
   margin-top: 10px;
@@ -1698,13 +1699,24 @@ button:focus-visible .roll-c > span {
   cursor: pointer;
   transition: border-color 0.3s var(--ease), transform 0.2s var(--ease-out);
 }
-.copy-btn:active {
+.copy-btn:active,
+.cv-btn:active {
   transform: scale(0.96);
 }
 @media (hover: hover) and (pointer: fine) {
-  .copy-btn:hover {
+  .copy-btn:hover,
+  .cv-btn:hover {
     border-color: var(--ink);
   }
+}
+.cv-btn {
+  margin-top: 0;
+  text-decoration: none;
+}
+/* En el panel de portada: bajo el rol, sin estirarse */
+.hpanel-cv {
+  justify-self: start;
+  animation: fade-in 0.8s var(--ease-out) 0.6s both;
 }
 
 /* ---------- Proyecto: ficha a la izquierda, imagen a la derecha ---------- */

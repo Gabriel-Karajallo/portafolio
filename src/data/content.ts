@@ -16,6 +16,7 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/gabrielkarajallo/',
   github: '', // TODO(Gabriel): URL de tu GitHub
   photo: '/profile.webp',
+  cv: '/Gabriel-Karajallo-CV.pdf',
   since: 2024,
 };
 
