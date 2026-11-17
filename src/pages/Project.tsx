@@ -17,7 +17,7 @@ export function Project({ slug }: { slug: string }) {
       {/* La imagen sigue ocupando toda la tarjeta, como venía de «Trabajo» */}
       <div className="project-hero">
         {p.shots && !p.image ? (
-          <Showcase shots={p.shots} hue={p.color} />
+          <Showcase shots={p.shots} hue={p.color} cycle />
         ) : (
           <ImageSlot src={p.image} hint={`public/projects/${p.slug}.jpg`} />
         )}

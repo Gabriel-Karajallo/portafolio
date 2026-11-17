@@ -26,7 +26,7 @@ const SLIDE_MS = 760;
 
 function Media({ p }: { p: Project }) {
   return p.shots && !p.image ? (
-    <Showcase shots={p.shots} hue={p.color} />
+    <Showcase shots={p.shots} hue={p.color} cycle />
   ) : (
     <ImageSlot src={p.image} hint={`public/projects/${p.slug}.jpg`} label={p.title} />
   );
@@ -114,6 +114,7 @@ export function Work({ active, setActive, ready }: Props) {
     const timers: number[] = [];
 
     const goTo = (next: number) => {
+      if (document.documentElement.classList.contains('menu-open')) return;
       if (busy.current || next === activeRef.current || next < 0 || next >= itemsRef.current.length) return;
       busy.current = true;
       tick(next > activeRef.current ? 1 : 1.12);
@@ -221,6 +222,11 @@ export function Work({ active, setActive, ready }: Props) {
           <span className="wheel-num" key={`y${active}`}>{p.year}</span>
         </div>
       </div>
+
+      {/* solo en móvil: el tipo del proyecto activo, sobre su título */}
+      <p className="mono work-kind" key={`k${active}`} aria-hidden>
+        {p.kind}
+      </p>
 
       <footer className="work-foot">
         <span className="mono">

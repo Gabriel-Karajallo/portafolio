@@ -53,7 +53,10 @@ export default function App() {
   const [active, setActive] = useState(0);
   const [inverted, setInverted] = useState(readInvert);
   const [soundOn, setSoundOn] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const cardRef = useRef<HTMLElement>(null);
+  const menuBtn = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   // Al volver de un proyecto, la rueda se queda en ese proyecto.
   const projectIndex = route.name === 'project' ? projectSlugs.indexOf(route.slug) : -1;
@@ -71,6 +74,22 @@ export default function App() {
       /* sin almacenamiento: no pasa nada */
     }
   }, [inverted]);
+
+  // Menú de móvil: se cierra al cambiar de ruta o con Escape; mientras está abierto,
+  // el foco va a sus enlaces y la rueda de proyectos no recibe gestos.
+  useEffect(() => setMenuOpen(false), [route]);
+  useEffect(() => {
+    document.documentElement.classList.toggle('menu-open', menuOpen);
+    if (!menuOpen) return;
+    menuRef.current?.querySelector<HTMLElement>('a')?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      setMenuOpen(false);
+      menuBtn.current?.focus();
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [menuOpen]);
 
   useEffect(() => {
     cardRef.current?.scrollTo(0, 0);
@@ -136,6 +155,55 @@ export default function App() {
       {!loaded && <Loader onDone={onLoaded} />}
       <Cursor />
 
+      {/* Menú de móvil a pantalla completa (en escritorio no se muestra) */}
+      <div
+        id="mobile-menu"
+        className={`menu ${menuOpen ? 'is-open' : ''}`}
+        ref={menuRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={ui.nav.main}
+        inert={!menuOpen}
+      >
+        <div className="menu-head">
+          <span className="mono menu-city">
+            {content.city}, {content.country}
+          </span>
+          <button
+            type="button"
+            className="mono menu-toggle is-open"
+            onClick={() => {
+              setMenuOpen(false);
+              menuBtn.current?.focus();
+            }}
+          >
+            {ui.nav.close}
+            <span className="menu-icon" aria-hidden>
+              <i />
+              <i />
+            </span>
+          </button>
+        </div>
+        <nav className="menu-links" aria-label={ui.nav.main}>
+          {NAV.map((item, i) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className={item.match.includes(route.name) ? 'is-current' : ''}
+              aria-current={item.match.includes(route.name) ? 'page' : undefined}
+              style={{ '--i': i } as CSSProperties}
+              onClick={linkTo(item.href)}
+            >
+              <span className="mono menu-num">{String(i + 1).padStart(2, '0')}</span>
+              {ui.nav[item.key]}
+            </a>
+          ))}
+        </nav>
+        <a className="mono menu-mail" href={`mailto:${profile.email}`}>
+          {profile.email} ↗
+        </a>
+      </div>
+
       <div className={`frame ${loaded ? 'is-in' : ''}`}>
         <aside
           className={`side ${project ? 'side--project' : ''}`}
@@ -156,7 +224,17 @@ export default function App() {
           </div>
 
           <div className="side-tools">
-            <button type="button" className="mono tool" onClick={toggleInvert} aria-pressed={inverted}>
+            <button
+              type="button"
+              className="mono tool tool--invert"
+              onClick={toggleInvert}
+              aria-pressed={inverted}
+              aria-label={ui.tools.invert}
+            >
+              {/* en móvil solo se ve el icono */}
+              <span className="tool-icon" aria-hidden>
+                ◐
+              </span>
               <Roll text={ui.tools.invert} />
             </button>
             <div className="lang" role="group" aria-label={ui.tools.language}>
@@ -204,6 +282,22 @@ export default function App() {
                 </a>
               ))}
             </div>
+            {/* solo en móvil: sección actual y botón del menú */}
+            <span className="mono nav-current">{ui.nav[NAV.find((n) => n.match.includes(route.name))?.key ?? 'work']}</span>
+            <button
+              type="button"
+              className="mono menu-toggle"
+              ref={menuBtn}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+              onClick={() => setMenuOpen(true)}
+            >
+              {ui.nav.menu}
+              <span className="menu-icon" aria-hidden>
+                <i />
+                <i />
+              </span>
+            </button>
             <a className="mono nav-mail" href={`mailto:${profile.email}`} data-cursor={ui.cursor.write}>
               <Roll text={profile.email} /> ↗
             </a>
