@@ -19,13 +19,6 @@ export const profile = {
   since: 2024,
 };
 
-// FORMULARIO DE CONTACTO
-// Para recibir los mensajes en tu correo sin servidor propio, crea un formulario
-// gratis en https://formspree.io y pega aquí su URL (https://formspree.io/f/xxxxxxx).
-// Mientras esté vacío, «Enviar» abre el programa de correo del visitante con el
-// mensaje ya escrito.
-export const contactEndpoint = ''; // TODO(Gabriel)
-
 // Lo que no se traduce; la lista completa de cada idioma está en su contenido (`stack`).
 const baseStack = ['React', 'TypeScript', 'Angular', 'React Native', 'C#', '.NET', 'SQL Server', 'MySQL'];
 
@@ -160,7 +153,6 @@ const es = {
   stack: [...baseStack, 'Inteligencia Artificial', 'Git'],
   photoAlt: 'Gabriel Karajallo en Edimburgo',
   photoCaption: 'Edimburgo',
-  contactTopics: ['Un proyecto', 'Una oferta de trabajo', 'Otra cosa'],
   projects: [gestionaEs],
   experience: [
     { when: '2025 — hoy', company: 'Wortach', role: 'Desarrollador full-stack' },
@@ -193,7 +185,6 @@ const en: Content = {
   stack: [...baseStack, 'Artificial Intelligence', 'Git'],
   photoAlt: 'Gabriel Karajallo in Edinburgh',
   photoCaption: 'Edinburgh',
-  contactTopics: ['A project', 'A job offer', 'Something else'],
   projects: [gestionaEn],
   experience: [
     { when: '2025 — now', company: 'Wortach', role: 'Full-stack developer' },

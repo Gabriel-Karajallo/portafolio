@@ -6,7 +6,6 @@ import { HobbyPreview } from '../components/HobbyPreview';
 import { Roll } from '../components/Roll';
 import { RevealTitle } from '../components/RevealTitle';
 import { Fade, Typed } from '../components/Typed';
-import { linkTo } from '../lib/router';
 
 function Label({ text }: { text: string }) {
   return <Typed as="h2" className="mono label" text={text} />;
@@ -102,9 +101,6 @@ export function About() {
             <Roll text={profile.email} />
           </a>
           <p className="contact-social">
-            <a className="mono" href="/contacto" onClick={linkTo('/contacto')}>
-              <Roll text={t.form} /> →
-            </a>
             {social.map((s) => (
               <a key={s.name} className="mono" href={s.href} target="_blank" rel="noreferrer">
                 <Roll text={s.name} /> ↗

@@ -158,11 +158,10 @@ export const photos: PersonalPhoto[] = [
     w: 1125,
     h: 1500,
     alt: {
-      es: 'Escalinata de piedra entre árboles con luz de tarde',
-      en: 'Stone stairway between trees in afternoon light',
+      es: 'Escalinata de piedra entre árboles en Edimburgo, con luz de tarde',
+      en: 'Stone stairway between trees in Edinburgh, in afternoon light',
     },
-    // TODO(Gabriel): pon el sitio exacto en el título si quieres
-    title: { es: 'Escaleras al sol', en: 'Stairs in the sun' },
+    title: { es: 'Rincón en Edimburgo', en: 'Corner of Edinburgh' },
   },
   {
     src: '/personal/glenfinnan-viaducto.webp',
