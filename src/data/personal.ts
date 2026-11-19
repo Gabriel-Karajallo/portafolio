@@ -111,7 +111,7 @@ export const photos: PersonalPhoto[] = [
       es: 'El castillo de Edimburgo sobre la roca, visto desde unas escaleras de piedra',
       en: 'Edinburgh Castle on its rock, seen from a stone stairway',
     },
-    title: { es: 'Edimburgo', en: 'Edinburgh' },
+    title: { es: 'The Vennel Viewpoint, Edimburgo', en: 'The Vennel Viewpoint, Edinburgh' },
   },
   {
     src: '/personal/glenfinnan-tren.webp',

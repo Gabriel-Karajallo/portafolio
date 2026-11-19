@@ -35,13 +35,6 @@ const toMin = (hhmm: string) => {
   const [h, m] = hhmm.split(':').map(Number);
   return h * 60 + m;
 };
-const duration = (from: string, to: string, lang: 'es' | 'en') => {
-  const d = toMin(to) - toMin(from);
-  const h = Math.floor(d / 60);
-  const m = d % 60;
-  return [h ? `${h} h` : '', m ? `${m} min` : ''].filter(Boolean).join(lang === 'es' ? ' y ' : ' ');
-};
-
 function Routine() {
   const lang = useLang();
   const t = useUI().personal.routine;
@@ -68,9 +61,6 @@ function Routine() {
             exit={{ opacity: 0, y: -6, filter: 'blur(2px)' }}
             transition={{ duration: 0.22, ease: [0.2, 0.7, 0.2, 1] }}
           >
-            <p className="mono rt-time">
-              {step.from} — {step.to} · {duration(step.from, step.to, lang)}
-            </p>
             <p className="rt-name">{step.title[lang]}</p>
             <p className="rt-text muted">{step.text[lang]}</p>
           </motion.div>

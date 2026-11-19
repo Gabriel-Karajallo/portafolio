@@ -1289,12 +1289,7 @@ button:focus-visible .roll-c > span {
 .rt-detail p {
   margin: 0;
 }
-.rt-time {
-  font-size: 11px;
-  color: var(--accent);
-}
 .rt-name {
-  margin-top: 8px !important;
   font-size: clamp(30px, 2.6vw, 42px);
   font-weight: 500;
   letter-spacing: -0.04em;
