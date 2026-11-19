@@ -9,13 +9,8 @@ const es = {
   cv: { download: 'Descargar CV', label: 'Currículum', file: 'Gabriel-Karajallo-CV.pdf' },
   work: {
     aria: 'Proyectos',
-    soonKind: 'Próximamente',
-    soonTitle: 'Más proyectos',
-    building: 'En construcción',
     hint: 'Rueda o ↑ ↓ para navegar',
-    soonHint: 'Pronto más proyectos · mientras tanto, hablemos',
     open: 'Ver proyecto',
-    contact: 'Contacto',
   },
   project: {
     scroll: 'Desliza para leer ↓',
@@ -92,13 +87,8 @@ const en: UI = {
   cv: { download: 'Download CV', label: 'Résumé', file: 'Gabriel-Karajallo-CV.pdf' },
   work: {
     aria: 'Projects',
-    soonKind: 'Coming soon',
-    soonTitle: 'More projects',
-    building: 'Under construction',
     hint: 'Scroll or ↑ ↓ to browse',
-    soonHint: 'More projects soon · meanwhile, let’s talk',
     open: 'View project',
-    contact: 'Contact',
   },
   project: {
     scroll: 'Scroll to read ↓',

@@ -20,11 +20,16 @@ export function ProjectPanel({ p }: { p: Project }) {
         ← <Roll text={t.back} />
       </a>
       <h1 className="ppanel-title" aria-label={p.title}>
-        {[...p.title].map((c, i) => (
-          <span key={i} aria-hidden style={{ '--i': i } as CSSProperties}>
-            {c}
-          </span>
-        ))}
+        {/* los espacios van como texto suelto: dentro de un inline-block se colapsarían */}
+        {[...p.title].map((c, i) =>
+          c === ' ' ? (
+            ' '
+          ) : (
+            <span key={i} aria-hidden style={{ '--i': i } as CSSProperties}>
+              {c}
+            </span>
+          ),
+        )}
       </h1>
       <p className="ppanel-summary">{p.summary}</p>
       <dl className="ppanel-rows">

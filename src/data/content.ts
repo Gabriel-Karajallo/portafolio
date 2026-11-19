@@ -146,6 +146,87 @@ const gestionaEn: Project = {
   ],
 };
 
+// ---------- Silvia Romero: lo común + los textos de cada idioma ----------
+const silvia = {
+  slug: 'silvia-romero',
+  title: 'Silvia Romero',
+  year: '2026',
+  link: 'https://silviaesteticavanzada.vercel.app',
+  stack: ['React', 'TypeScript', 'Vite', 'React Router', 'Vercel'],
+  color: '#c4a35a', // dorado de la marca
+  shotSrc: ['/projects/silvia-inicio.webp', '/projects/silvia-forma.webp', '/projects/silvia-centros.webp'],
+};
+
+const silviaEs: Project = {
+  ...silvia,
+  kind: 'Web de marca',
+  role: 'Diseño y desarrollo front-end',
+  summary:
+    'La web de Silvia Romero, estética avanzada con tres centros en Sevilla: presenta la marca y sus servicios, lleva a cada clienta al centro que le corresponde y de ahí a reservar.',
+  body: [
+    'Silvia Romero lleva veinte años en estética, peluquería y bienestar, repartida en dos centros en Triana y uno en Nervión. Cada centro tiene su agenda, su equipo y sus servicios, y la web tenía que explicarlo sin liar a nadie.',
+    'Es una web editorial, en marfil y dorado, pensada sobre todo para el móvil: se entiende la marca de un vistazo y en dos toques se llega a la reserva.',
+  ],
+  features: [
+    {
+      name: 'Servicios',
+      text: 'Cinco familias de servicios, cada una con sus tratamientos y los centros donde se pueden reservar.',
+    },
+    {
+      name: 'Centros',
+      text: 'Una ficha por centro con dirección, horario, cómo llegar, su equipo y sus opiniones.',
+    },
+    {
+      name: 'Reserva',
+      text: 'Cada botón de reservar lleva al Booksy del centro correcto, sin formularios de por medio.',
+    },
+    {
+      name: 'SEO local',
+      text: 'Título y descripción por página y datos estructurados de negocio y de preguntas frecuentes para aparecer bien en Google.',
+    },
+  ],
+  shots: [
+    { src: silvia.shotSrc[0], alt: 'Silvia Romero: portada con el titular y el botón de reservar cita' },
+    { src: silvia.shotSrc[1], alt: 'Silvia Romero: la forma de trabajar de la marca, con la firma de Silvia' },
+    { src: silvia.shotSrc[2], alt: 'Silvia Romero: listado de los tres centros en Sevilla' },
+  ],
+};
+
+const silviaEn: Project = {
+  ...silvia,
+  kind: 'Brand website',
+  role: 'Design and front-end development',
+  summary:
+    'The website for Silvia Romero, an advanced beauty clinic with three locations in Seville: it presents the brand and its services, sends each client to the right location and from there to booking.',
+  body: [
+    'Silvia Romero has spent twenty years in beauty, hairdressing and wellbeing, across two locations in Triana and one in Nervión. Each has its own diary, team and services, and the site had to explain that without confusing anyone.',
+    'It is an editorial site in ivory and gold, designed mobile-first: you get the brand at a glance and reach booking in two taps.',
+  ],
+  features: [
+    {
+      name: 'Services',
+      text: 'Five service families, each with its treatments and the locations where they can be booked.',
+    },
+    {
+      name: 'Locations',
+      text: 'A page per location with address, opening hours, directions, its team and its reviews.',
+    },
+    {
+      name: 'Booking',
+      text: 'Every book button leads to the right location’s Booksy page, with no forms in between.',
+    },
+    {
+      name: 'Local SEO',
+      text: 'Per-page title and description plus structured data for the business and FAQs, so it shows up well on Google.',
+    },
+  ],
+  shots: [
+    { src: silvia.shotSrc[0], alt: 'Silvia Romero: home page with the headline and the book button' },
+    { src: silvia.shotSrc[1], alt: 'Silvia Romero: the brand’s way of working, signed by Silvia' },
+    { src: silvia.shotSrc[2], alt: 'Silvia Romero: list of the three locations in Seville' },
+  ],
+};
+
 // ---------- Textos por idioma ----------
 const es = {
   city: 'Sevilla',
@@ -154,7 +235,7 @@ const es = {
   stack: [...baseStack, 'Inteligencia Artificial', 'Git'],
   photoAlt: 'Gabriel Karajallo en Edimburgo',
   photoCaption: 'Edimburgo',
-  projects: [gestionaEs],
+  projects: [gestionaEs, silviaEs],
   experience: [
     { when: '2025 — hoy', company: 'Wortach', role: 'Desarrollador full-stack' },
     { when: '2024', company: 'Insinno España', role: 'Desarrollador front-end' },
@@ -186,7 +267,7 @@ const en: Content = {
   stack: [...baseStack, 'Artificial Intelligence', 'Git'],
   photoAlt: 'Gabriel Karajallo in Edinburgh',
   photoCaption: 'Edinburgh',
-  projects: [gestionaEn],
+  projects: [gestionaEn, silviaEn],
   experience: [
     { when: '2025 — now', company: 'Wortach', role: 'Full-stack developer' },
     { when: '2024', company: 'Insinno España', role: 'Front-end developer' },

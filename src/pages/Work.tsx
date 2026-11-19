@@ -7,7 +7,7 @@ import { Roll } from '../components/Roll';
 import { linkTo, navigate } from '../lib/router';
 import { tick } from '../lib/sound';
 
-const hrefOf = (it: { slug: string }) => (it.slug === 'pronto' ? '/contacto' : `/proyecto/${it.slug}`);
+const hrefOf = (it: { slug: string }) => `/proyecto/${it.slug}`;
 const pad = (n: number) => String(n).padStart(2, '0');
 
 /**
@@ -29,23 +29,6 @@ function Media({ p }: { p: Project }) {
     <Showcase shots={p.shots} hue={p.color} cycle />
   ) : (
     <ImageSlot src={p.image} hint={`public/projects/${p.slug}.jpg`} label={p.title} />
-  );
-}
-
-/** Última diapositiva: hueco para lo que viene. */
-type Soon = { slug: 'pronto'; title: string; kind: string; year: string };
-type Item = Project | Soon;
-const isSoon = (it: Item): it is Soon => it.slug === 'pronto';
-
-function Soon({ label }: { label: string }) {
-  return (
-    <div className="soon">
-      {/* marco neutro: lo que venga puede ser web, móvil o lo que sea */}
-      <span className="soon-frame">
-        <i />
-      </span>
-      <span className="soon-tag mono">{label}</span>
-    </div>
   );
 }
 
@@ -80,7 +63,7 @@ export function Work({ active, setActive, ready }: Props) {
   const { projects } = useContent();
   const ui = useUI();
   const t = ui.work;
-  const items: Item[] = [...projects, { slug: 'pronto', title: t.soonTitle, kind: t.soonKind, year: '…' }];
+  const items = projects;
   const itemsRef = useRef(items);
   itemsRef.current = items;
   const quick =
@@ -164,7 +147,6 @@ export function Work({ active, setActive, ready }: Props) {
   }, [setActive]);
 
   const p = items[active];
-  const soon = isSoon(p);
   const shift = { '--a': active } as CSSProperties;
 
   return (
@@ -172,7 +154,7 @@ export function Work({ active, setActive, ready }: Props) {
       <div className="work-stage" aria-hidden>
         {items.map((proj, i) => (
           <div key={proj.slug} className="work-card" style={cardStyle(i - active, phase, i)}>
-            {isSoon(proj) ? <Soon label={t.building} /> : <Media p={proj} />}
+            <Media p={proj} />
           </div>
         ))}
         <div className="work-shade" />
@@ -206,7 +188,7 @@ export function Work({ active, setActive, ready }: Props) {
                   <a
                     href={hrefOf(proj)}
                     onClick={linkTo(hrefOf(proj))}
-                    data-cursor={isSoon(proj) ? ui.cursor.write : ui.cursor.view}
+                    data-cursor={ui.cursor.view}
                   >
                     {proj.title}
                   </a>
@@ -232,17 +214,14 @@ export function Work({ active, setActive, ready }: Props) {
         <span className="mono">
           {pad(active + 1)} / {pad(items.length)}
         </span>
-        <span className="mono work-hint">
-          {soon ? t.soonHint : t.hint}
-        </span>
+        <span className="mono work-hint">{t.hint}</span>
         <a
           className="mono work-open"
-          key={soon ? 'soon' : 'open'}
           href={hrefOf(p)}
           onClick={linkTo(hrefOf(p))}
-          data-cursor={soon ? ui.cursor.write : ui.cursor.view}
+          data-cursor={ui.cursor.view}
         >
-          <Roll text={soon ? t.contact : t.open} /> ↗
+          <Roll text={t.open} /> ↗
         </a>
       </footer>
     </section>
